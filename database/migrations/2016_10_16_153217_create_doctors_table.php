@@ -27,7 +27,6 @@ class CreateDoctorsTable extends Migration
             $table->char('genre', 1)->default('M');
             $table->integer('crm', $autoIncrement = false);
             $table->char('crm_status', 2);
-            $table->string('pass', 50)->nullable();
             $table->integer('status', $autoIncrement = false, 1);
             $table->text('obs')->nullable();
             $table->timestamps();

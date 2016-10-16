@@ -34,7 +34,6 @@ class CreatePatientsTable extends Migration
             $table->string('prontuario', 15)->nullable();
             $table->integer('cpf', $autoIncrement = false, 20);
             $table->string('email', 100)->unique();
-            $table->string('pass', 50)->nullable();
             $table->longText('Obs')->nullable();
             $table->timestamps();
             $table->softDeletes();
