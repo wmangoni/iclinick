@@ -16,9 +16,10 @@ class CreatePaymentTable extends Migration
         Schema::create('payment', function (Blueprint $table) {
             $table->increments('id');
             $table->float('amount', 8, 2);
-            $table->integer('patient_id', 11);
+            $table->integer('patient_id', $autoIncrement = false, 11);
             $table->text('obs')->nullable();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

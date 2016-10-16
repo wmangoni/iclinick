@@ -19,6 +19,7 @@ class CreateConveniosTable extends Migration
             $table->string('name', 100);
             $table->string('description', 255)->nullable();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
@@ -32,3 +33,5 @@ class CreateConveniosTable extends Migration
         Schema::dropIfExists('convenios');
     }
 }
+
+
