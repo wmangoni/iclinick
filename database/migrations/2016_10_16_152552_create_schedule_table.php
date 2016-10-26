@@ -17,10 +17,10 @@ class CreateScheduleTable extends Migration
             $table->increments('id');
             $table->string('name', 100);
             $table->date('date');
-            $table->integer('segment', $autoIncrement = false, 5)->nullable();
+            $table->integer('segment')->nullable();
             $table->text('description')->nullable();
             $table->enum('status', ['pending', 'finalized', 'canceled']);
-            $table->integer('doctor_id', $autoIncrement = false, 11);
+            $table->integer('doctor_id');
             $table->longText('Obs')->nullable();
             $table->timestamps();
             $table->softDeletes();

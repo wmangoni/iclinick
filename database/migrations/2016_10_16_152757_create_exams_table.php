@@ -17,7 +17,7 @@ class CreateExamsTable extends Migration
             $table->increments('id');
             $table->string('description', 255)->nullable();
             $table->char('type', 1);
-            $table->integer('Company', $autoIncrement = false, 11)->nullable();
+            $table->integer('company')->nullable();
             $table->longText('text_memo')->nullable();
             $table->timestamps();
             $table->softDeletes();
