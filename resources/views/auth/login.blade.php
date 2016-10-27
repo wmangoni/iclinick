@@ -1,7 +1,7 @@
-@extends('layouts.app')
+@extends('layouts.login')
 
 @section('content')
-<div class="container">
+<div class="container" style="position: absolute;top: 50%;left: 50%; transform: translate(-50%, -50%);">
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
             <div class="panel panel-default">

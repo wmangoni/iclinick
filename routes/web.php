@@ -12,7 +12,23 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+	if (Auth::check()) {
+    	return redirect('home');
+	} else {
+		return view('auth.login');
+	}
+});
+
+Route::get('/login', function () {
+	if (Auth::check()) {
+    	return redirect('home');
+	} else {
+		return view('auth.login');
+	}
+});
+
+Route::get('/register', function () {
+	return view('auth.register');
 });
 
 Auth::routes();

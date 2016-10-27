@@ -65,30 +65,15 @@
                 <!-- Right Side Of Navbar -->
                 <ul class="nav navbar-nav navbar-right">
                     <!-- Authentication Links -->
-                    @include('components.message')
-                    @include('components.tasks')
-                    @include('components.user')
+                    <li><a href="{{ url('/login') }}">Login</a></li>
+                    <li><a href="{{ url('/register') }}">Register</a></li>
                 </ul>
             </div>
-            <!-- /.navbar-top-links -->
-
-            @include('components.menu')
-            <!-- /.navbar-static-side -->
         </nav>
 
         @yield('content')
 
     </div>
     <!-- /#wrapper -->
-
-    <!-- jQuery -->
-    <script src="{{ asset('/js/jquery.min.js') }}"></script>
-    <!-- Bootstrap Core JavaScript -->
-    <script src="{{ asset('/js/bootstrap.min.js') }}"></script>
-    <!-- Metis Menu Plugin JavaScript -->
-    <script src="{{ asset('/js/metisMenu.min.js') }}"></script>
-    <!-- Custom Theme JavaScript -->
-    <!-- Scripts -->
-    <script src="{{ asset('/js/main.js') }}"></script>
 </body>
 </html>

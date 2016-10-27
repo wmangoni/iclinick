@@ -17,7 +17,7 @@ class CreateUsersTable extends Migration
             $table->increments('id');
             $table->string('name');
             $table->string('email')->unique();
-            $table->integer('type', $autoIncrement = false, 2);//1 admin, 2 func, 3 doctor, 4 patient;
+            $table->integer('type')->nullable();//1 admin, 2 func, 3 doctor, 4 patient;
             $table->string('password');
             $table->rememberToken();
             $table->timestamps();

@@ -4,8 +4,16 @@
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
+        <!-- Bootstrap Core CSS -->
+	    <link href="{{ asset('/css/bootstrap.min.css') }}" rel="stylesheet">
+	    <!-- MetisMenu CSS -->
+	    <link href="{{ asset('/css/metisMenu.min.css') }}" rel="stylesheet">
+	    <!-- Custom CSS -->
+	    <link href="{{ asset('/css/sb-admin-2.css') }}" rel="stylesheet">
+	    <!-- Custom Fonts -->
+	    <link href="{{ asset('/css/font-awesome.min.css') }}" rel="stylesheet" type="text/css">
 
-        <title>Laravel</title>
+        <title>Iclinick</title>
 
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Raleway:100,600" rel="stylesheet" type="text/css">
@@ -75,7 +83,7 @@
 
             <div class="content">
                 <div class="title m-b-md">
-                    Laravel
+                    Iclinic
                 </div>
 
                 <div class="links">
