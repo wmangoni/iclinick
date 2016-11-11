@@ -8,6 +8,7 @@ class State extends Model
 {
     protected $fillable = [
     	'name',
-		'description'
-	];
+        'description'
+    ];
+    protected $table = 'state';
 }

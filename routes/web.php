@@ -13,17 +13,17 @@
 
 Route::get('/', function () {
 	if (Auth::check()) {
-    	return redirect('home');
+            return redirect('home');
 	} else {
-		return view('auth.login');
+            return view('auth.login');
 	}
 });
 
 Route::get('/login', function () {
 	if (Auth::check()) {
-    	return redirect('home');
+            return redirect('home');
 	} else {
-		return view('auth.login');
+            return view('auth.login');
 	}
 });
 

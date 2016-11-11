@@ -8,11 +8,12 @@ class Schedule extends Model
 {
     protected $fillable = [
     	'name',
-		'date',
-		'segment',
-		'description',
-		'status',
-		'doctor_id',
-		'Obs'
+        'date',
+        'segment',
+        'description',
+        'status',
+        'doctor_id',
+        'Obs'
     ];
+    protected $table = 'schedule';
 }

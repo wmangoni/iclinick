@@ -4,10 +4,10 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Segments extends Model
+class Service extends Model
 {
     protected $fillable = [
     	'name',
-		'description'
-	];
+        'description'
+    ];
 }

@@ -8,7 +8,8 @@ class Payment extends Model
 {
     protected $fillable = [
     	'amount',
-		'patient_id',
-		'obs'
-	];
+        'patient_id',
+        'obs'
+    ];
+    protected $table = 'payment';
 }

@@ -4,10 +4,9 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Convenios extends Model
+class Profession extends Model
 {
     protected $fillable = [
-    	'cod',
     	'name',
 		'description'
 	];

@@ -4,10 +4,11 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Medicines extends Model
+class Convenio extends Model
 {
     protected $fillable = [
+    	'cod',
     	'name',
-		'description'
-	];
+        'description'
+    ];
 }

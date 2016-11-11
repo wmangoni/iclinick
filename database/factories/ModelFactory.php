@@ -12,27 +12,57 @@
 */
 
 $factory->define(App\User::class, function (Faker\Generator $faker) {
-    for ($i = 0; $i < 40; $i++) {
-		$data = $faker->date($format = 'Y-m-d', $max = 'now'),
-		return [
-			'name' => $faker->name,
-			'email' => $faker->unique()->safeEmail,
-			'birthday' => mt_rand(1960, 1988) . mt_rand(1, 12) . mt_rand(1, 28),
-			'address' => $faker->address,
-			'city_id' => mt_rand(1, 5000),
-			'state_id' => mt_rand(1, 27),
-			'zipcode' => mt_rand(81720600, 99720600),
-			'genre' => 'm',
-			'crm' => $faker->numerify('str #######'),
-			'crm_status' => 1,
-			'status' => 1,
-			'obs' => $faker->text,
-			'create_at' => $data,
-			'update_at' => $data,
-		];
-	}
+    
+    $data = $faker->date($format = 'Y-m-d', $max = 'now');
+    return [
+            'name' => $faker->name,
+            'email' => $faker->unique()->safeEmail,
+            'type' => mt_rand(1, 3),
+            'address' => $faker->address,
+            'password' => $faker->password,
+            'created_at' => $data,
+            'updated_at' => $data,
+    ];
 });
 
-factory(App\Patients::class, 50)->create()->each(function($u) {
-	$u->posts()->save(factory(App\Patients::class)->make());
+$factory->define(App\Doctor::class, function (Faker\Generator $faker) {
+    
+    $data = $faker->date($format = 'Y-m-d', $max = 'now');
+    return [
+            'name' => $faker->name,
+            'email' => $faker->unique()->safeEmail,
+            'birthday' => $faker->date($format = 'Y-m-d', $max = 'now'),
+            'address' => $faker->address,
+            'city_id' => mt_rand(1, 30),
+            'state_id' => 1,
+            'zipcode' => mt_rand(81720600, 99720600),
+            'genre' => 'm',
+            'crm' => mt_rand(81720600, 99720600),
+            'crm_status' => 1,
+            'status' => 1,
+            'obs' => $faker->text,
+            'created_at' => $data,
+            'updated_at' => $data,
+    ];
+});
+
+$factory->define(App\Patient::class, function (Faker\Generator $faker) {
+    
+    $data = $faker->date($format = 'Y-m-d', $max = 'now');
+    return [
+            'name' => $faker->name,
+            'Phone' => $faker->phoneNumber,
+            'birthday' => $faker->date($format = 'Y-m-d', $max = 'now'),
+            'address' => $faker->address,
+            'city_id' => mt_rand(1, 30),
+            'state_id' => 1,
+            'zipcode' => mt_rand(81720600, 99720600),
+            'genre' => 'm',
+            'prof_id' => mt_rand(1, 10),
+            'email' => $faker->unique()->safeEmail,
+            'cpf' => mt_rand(100, 999).'.'.mt_rand(100, 999).'.'.mt_rand(100, 999).'-'.mt_rand(10, 99),
+            'obs' => $faker->text,
+            'created_at' => $data,
+            'updated_at' => $data,
+    ];
 });
