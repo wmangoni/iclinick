@@ -11,26 +11,27 @@
 |
 */
 
-Route::get('/', function () {
-	if (Auth::check()) {
-            return redirect('home');
-	} else {
-            return view('auth.login');
-	}
-});
-
 Route::get('/login', function () {
-	if (Auth::check()) {
-            return redirect('home');
-	} else {
-            return view('auth.login');
-	}
+    if (Auth::check()) {
+        return redirect('home');
+    } else {
+        return view('auth.login');
+    }
 });
 
 Route::get('/register', function () {
-	return view('auth.register');
+    return view('auth.register');
 });
 
-Auth::routes();
-
-Route::get('/home', 'HomeController@index');
+Route::group(['middleware' => 'auth'], function () {
+    Route::get('/home', [ 'as' => 'home.index', 'uses' => 'HomeController@index']);
+    Route::resource('/doctors', 'DoctorsController');
+    Route::resource('/patients', 'PatientsController');
+    Route::resource('/payments', 'PaymentsController');
+    Route::resource('/schedule', 'ScheduleController');
+    Route::resource('/medicines', 'MedicinesController');
+    Route::resource('/segments', 'SegmentsController');
+    Route::resource('/convenios', 'ConveniosController');
+    Route::resource('/exams', 'ExamsController');
+    Route::resource('/services', 'ServicesController');
+});
