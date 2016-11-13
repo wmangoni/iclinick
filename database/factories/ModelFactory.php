@@ -60,7 +60,7 @@ $factory->define(App\Patient::class, function (Faker\Generator $faker) {
             'genre' => 'm',
             'prof_id' => mt_rand(1, 10),
             'email' => $faker->unique()->safeEmail,
-            'cpf' => mt_rand(100, 999).'.'.mt_rand(100, 999).'.'.mt_rand(100, 999).'-'.mt_rand(10, 99),
+            'cpf' => (string) 65415935745 + mt_rand(1, 9999),
             'obs' => $faker->text,
             'created_at' => $data,
             'updated_at' => $data,

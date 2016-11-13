@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Patient;
 
 class PatientsController extends Controller
 {
@@ -13,7 +14,18 @@ class PatientsController extends Controller
      */
     public function index()
     {
-        echo 'hello patients';
+        $title = 'Patients';
+        $modulo = 'patients';
+        $models = Patient::all();
+        $total = Patient::all()->count();
+        $fields = [
+            'name',
+            'address',
+            'Phone',
+            'cpf',
+            'email'
+        ];
+        return view('list', compact('title', 'models', 'total', 'fields', 'modulo'));
     }
 
     /**

@@ -3,8 +3,9 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use App\ModelBase;
 
-class Doctor extends Model
+class Doctor extends ModelBase
 {
     protected $fillable = [
     	'name',
@@ -27,4 +28,9 @@ class Doctor extends Model
     protected $hidden = [
         'pass'
     ];
+
+    public function city()
+    {
+        return $this->belongsTo('App\City','id');
+    }
 }

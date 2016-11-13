@@ -11,12 +11,10 @@
 |
 */
 
+Auth::routes();
+
 Route::get('/login', function () {
-    if (Auth::check()) {
-        return redirect('home');
-    } else {
-        return view('auth.login');
-    }
+    return view('auth.login');
 });
 
 Route::get('/register', function () {
@@ -24,6 +22,7 @@ Route::get('/register', function () {
 });
 
 Route::group(['middleware' => 'auth'], function () {
+    Route::get('/', [ 'as' => 'home.index', 'uses' => 'HomeController@index']);
     Route::get('/home', [ 'as' => 'home.index', 'uses' => 'HomeController@index']);
     Route::resource('/doctors', 'DoctorsController');
     Route::resource('/patients', 'PatientsController');

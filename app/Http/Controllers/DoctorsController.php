@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Doctor;
 
 class DoctorsController extends Controller
 {
@@ -13,7 +14,18 @@ class DoctorsController extends Controller
      */
     public function index()
     {
-        echo 'hello doctor';
+        $title = 'Doctors';
+        $modulo = 'doctors';
+        $models = Doctor::all();
+        $total = Doctor::all()->count();
+        $fields = [
+            'name',
+            'address',
+            'city',
+            'crm',
+            'email'
+        ];
+        return view('list', compact('title', 'models', 'total', 'fields', 'modulo'));
     }
 
     /**
@@ -23,7 +35,12 @@ class DoctorsController extends Controller
      */
     public function create()
     {
-        //
+        $doctor = new Doctor();
+        $fillables = $doctor->getFillable();
+        $title = 'Doctors';
+        $modulo = 'doctors';
+        $route = route('doctor.store');
+        return view('create', compact('title', 'patients', 'total', 'modulo', 'fillables', 'route'));
     }
 
     /**
