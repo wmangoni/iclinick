@@ -33,4 +33,5 @@ Route::group(['middleware' => 'auth'], function () {
     Route::resource('/convenios', 'ConveniosController');
     Route::resource('/exams', 'ExamsController');
     Route::resource('/services', 'ServicesController');
+    Route::resource('/professions', 'ProfessionsController');
 });

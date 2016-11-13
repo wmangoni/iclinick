@@ -21,7 +21,7 @@
                         </div>
                     </div>
                     <div class="panel-body">
-                        <table class="table table-responsive">
+                        <table class="table table-responsive table-striped">
                             @foreach($fields as $field)
                                 <th>{{ $field }}</th>
                             @endforeach
@@ -32,7 +32,11 @@
                                             @if( isset(json_decode($model->$f)->name) )
                                                 <td>{{ json_decode($model->$f)->name }}</td>
                                             @else
-                                                <td>{{ $model->$f }}</td>
+                                                @if( is_float($model->$f) )
+                                                    <td>$ {{ number_format($model->$f, 2, ',', '.') }}</td>
+                                                @else
+                                                    <td>{{ $model->$f }}</td>
+                                                @endif
                                             @endif
                                         @endforeach
                                     <tr>

@@ -3,9 +3,11 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Medicine;
 
-class MedicinesController extends Controller
+use App\Http\Requests;
+use App\Profession;
+
+class ProfessionsController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,10 +16,10 @@ class MedicinesController extends Controller
      */
     public function index()
     {
-        $title = 'Medicines';
-        $modulo = 'medicines';
-        $models = Medicine::all();
-        $total = Medicine::all()->count();
+        $title = 'Professions';
+        $modulo = 'professions';
+        $models = Profession::all();
+        $total = Profession::all()->count();
         $fields = [
             'id',
             'name',

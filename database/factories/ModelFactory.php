@@ -66,3 +66,15 @@ $factory->define(App\Patient::class, function (Faker\Generator $faker) {
             'updated_at' => $data,
     ];
 });
+
+$factory->define(App\Payment::class, function (Faker\Generator $faker) {
+
+    $data = $faker->date($format = 'Y-m-d', $max = 'now');
+    return [
+        'amount' => mt_rand(66,385) * 1.1,
+        'patient_id' => mt_rand(1,55),
+        'obs' => $faker->address,
+        'created_at' => $data,
+        'updated_at' => $data,
+    ];
+});

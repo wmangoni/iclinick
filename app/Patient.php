@@ -31,6 +31,6 @@ class Patient extends Model
 	];
 
 	protected $hidden = [
-            'pass'
-        ];
+        'pass'
+    ];
 }

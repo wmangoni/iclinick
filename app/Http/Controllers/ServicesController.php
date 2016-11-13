@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Service;
 
 class ServicesController extends Controller
 {
@@ -13,7 +14,18 @@ class ServicesController extends Controller
      */
     public function index()
     {
-        //
+        $title = 'Services';
+        $modulo = 'services';
+        $models = Service::all();
+        $total = Service::all()->count();
+        $fields = [
+            'id',
+            'name',
+            'description',
+            'created_at',
+            'updated_at'
+        ];
+        return view('list', compact('title', 'models', 'total', 'fields', 'modulo'));
     }
 
     /**

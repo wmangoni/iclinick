@@ -17,11 +17,11 @@
                             <h4>Create</h4>
                         </div>
                         <div class="col-md-6">
-                            <a href="{{ $modulo }}" class="btn btn-default pull-right">Voltar</a>
+                            <a href="/{{ $module }}" class="btn btn-warning pull-right">Voltar</a>
                         </div>
                     </div>
                     <div class="panel-body">
-                        <form role="form" id="formreseller" action="{{ $route }}" method="post" enctype="multipart/form-data">
+                        <form role="form" action="{{ $route }}" method="post" enctype="multipart/form-data">
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="input-group">
@@ -29,6 +29,10 @@
                                     </div>
                                 </div>
                             </div>
+                            {!! csrf_field() !!}
+                            @if(isset($method) && $method == 'PUT')
+                                <input type="hidden" name="_method" value="PUT">
+                            @endif
                         </form>
                     </div>
                     <div class="panel-footer">

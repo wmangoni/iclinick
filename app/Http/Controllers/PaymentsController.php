@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Payment;
 
 class PaymentsController extends Controller
 {
@@ -13,7 +14,18 @@ class PaymentsController extends Controller
      */
     public function index()
     {
-        //
+        $title = 'Payments';
+        $modulo = 'payments';
+        $models = Payment::all();
+        $total = Payment::all()->count();
+        $fields = [
+            'id',
+            'amount',
+            'patient',
+            'obs',
+            'created_at'
+        ];
+        return view('list', compact('title', 'models', 'total', 'fields', 'modulo'));
     }
 
     /**

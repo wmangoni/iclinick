@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Convenio;
 
 class ConveniosController extends Controller
 {
@@ -13,7 +14,18 @@ class ConveniosController extends Controller
      */
     public function index()
     {
-        echo 'hello lists';
+        $title = 'Convenios';
+        $modulo = 'convenios';
+        $models = Convenio::all();
+        $total = Convenio::all()->count();
+        $fields = [
+            'cod',
+            'name',
+            'description',
+            'created_at',
+            'updated_at'
+        ];
+        return view('list', compact('title', 'models', 'total', 'fields', 'modulo'));
     }
 
     /**

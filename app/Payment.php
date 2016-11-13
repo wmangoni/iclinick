@@ -12,4 +12,9 @@ class Payment extends Model
         'obs'
     ];
     protected $table = 'payment';
+
+    public function patient()
+    {
+        return $this->hasOne('App\Patient', 'id');
+    }
 }

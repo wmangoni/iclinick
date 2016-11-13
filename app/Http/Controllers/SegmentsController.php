@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Segment;
 
 class SegmentsController extends Controller
 {
@@ -13,7 +14,18 @@ class SegmentsController extends Controller
      */
     public function index()
     {
-        //
+        $title = 'Segments';
+        $modulo = 'segments';
+        $models = Segment::all();
+        $total = Segment::all()->count();
+        $fields = [
+            'id',
+            'name',
+            'description',
+            'created_at',
+            'updated_at'
+        ];
+        return view('list', compact('title', 'models', 'total', 'fields', 'modulo'));
     }
 
     /**
