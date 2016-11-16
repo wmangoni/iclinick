@@ -37,7 +37,7 @@
         ]); ?>
     </script>
 </head>
-<body>
+<body data-src='{{ url('/') }}'>
     <div id="wrapper">
 
         <!-- Navigation -->

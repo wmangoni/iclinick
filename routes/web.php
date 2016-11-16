@@ -34,4 +34,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::resource('/exams', 'ExamsController');
     Route::resource('/services', 'ServicesController');
     Route::resource('/professions', 'ProfessionsController');
+    
+    //Routs to AJAX
+    Route::post('/load-cidades', [ 'as' => 'load-cidades', 'uses' => 'CitiesController@loadCidades']);
 });

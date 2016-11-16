@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Patient;
+use App\State;
 
 class PatientsController extends Controller
 {
@@ -39,7 +40,12 @@ class PatientsController extends Controller
         $module = 'patients';
         $route = 'patients.store';
         $formulario = 'modules.patients.form';
-        return view('create', compact('title', 'module', 'route', 'formulario'));
+        $statesCollection = State::all();
+        $states['0'] = 'Selecione';
+        foreach ($statesCollection as $key => $value) {
+            $states[$value->id] = $value->name;
+        }
+        return view('create', compact('title', 'module', 'route', 'formulario', 'states'));
     }
 
     /**
