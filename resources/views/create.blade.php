@@ -21,19 +21,7 @@
                         </div>
                     </div>
                     <div class="panel-body">
-                        <form role="form" action="{{ $route }}" method="post" enctype="multipart/form-data">
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <div class="input-group">
-                                        <input class="form-control" type="text" name="name">
-                                    </div>
-                                </div>
-                            </div>
-                            {!! csrf_field() !!}
-                            @if(isset($method) && $method == 'PUT')
-                                <input type="hidden" name="_method" value="PUT">
-                            @endif
-                        </form>
+                        @include($formulario)
                     </div>
                     <div class="panel-footer">
                         Fotter

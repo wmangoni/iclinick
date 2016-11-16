@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Patient extends Model
 {
     protected $fillable = [
-	    'name',
+	'name',
         'address',
         'city_id',
         'state_id',
@@ -38,4 +38,5 @@ class Patient extends Model
     {
         return $this->hasMany('App\Payment');
     }
+    
 }

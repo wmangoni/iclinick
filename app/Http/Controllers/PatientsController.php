@@ -35,7 +35,11 @@ class PatientsController extends Controller
      */
     public function create()
     {
-        //
+        $title = 'Patients';
+        $module = 'patients';
+        $route = 'patients.store';
+        $formulario = 'modules.patients.form';
+        return view('create', compact('title', 'module', 'route', 'formulario'));
     }
 
     /**
