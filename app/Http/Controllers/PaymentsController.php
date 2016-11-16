@@ -16,7 +16,7 @@ class PaymentsController extends Controller
     {
         $title = 'Payments';
         $modulo = 'payments';
-        $models = Payment::all();
+        $models = Payment::with('patient')->get();
         $total = Payment::all()->count();
         $fields = [
             'id',
