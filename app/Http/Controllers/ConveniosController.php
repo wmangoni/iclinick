@@ -35,7 +35,11 @@ class ConveniosController extends Controller
      */
     public function create()
     {
-        echo 'hello create';
+        $title = 'Convenios';
+        $module = 'convenios';
+        $route = 'convenios.store';
+        $formulario = 'modules.convenios.form';
+        return view('create', compact('title', 'module', 'route', 'formulario'));
     }
 
     /**
