@@ -35,7 +35,11 @@ class SegmentsController extends Controller
      */
     public function create()
     {
-        //
+        $title = 'Segments';
+        $module = 'segments';
+        $route = 'segments.store';
+        $formulario = 'modules.segments.form';
+        return view('create', compact('title', 'module', 'route', 'formulario'));
     }
 
     /**
