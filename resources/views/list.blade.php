@@ -28,14 +28,14 @@
                             <tbody>
                                 @foreach($models as $model)
                                     <tr>
-                                        @foreach($fields as $f)
-                                            @if( isset(json_decode($model->$f)->name) )
-                                                <td>{{ json_decode($model->$f)->name }}</td>
+                                        @foreach($fields as $field)
+                                            @if( isset(json_decode($model->$field)->name) )
+                                                <td>{{ json_decode($model->$field)->name }}</td>
                                             @else
-                                                @if( is_float($model->$f) )
-                                                    <td>$ {{ number_format($model->$f, 2, ',', '.') }}</td>
+                                                @if( is_float($model->$field) )
+                                                    <td>$ {{ number_format($model->$field, 2, ',', '.') }}</td>
                                                 @else
-                                                    <td>{{ $model->$f }}</td>
+                                                    <td>{{ $model->$field }}</td>
                                                 @endif
                                             @endif
                                         @endforeach

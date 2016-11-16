@@ -15,6 +15,6 @@ class Payment extends Model
 
     public function patient()
     {
-        return $this->hasOne('App\Patient', 'id');
+        return $this->belongsTo('App\Patient');
     }
 }

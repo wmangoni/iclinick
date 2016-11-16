@@ -32,7 +32,7 @@ class CreatePatientsTable extends Migration
             $table->string('pai', 100)->nullable();
             $table->string('mae', 100)->nullable();
             $table->string('prontuario', 15)->nullable();
-            $table->integer('cpf', $autoIncrement = false, 20);
+            $table->string('cpf', 50);
             $table->string('email', 100)->unique();
             $table->longText('Obs')->nullable();
             $table->timestamps();

@@ -33,4 +33,9 @@ class Patient extends Model
 	protected $hidden = [
         'pass'
     ];
+
+    public function payment()
+    {
+        return $this->hasMany('App\Payment');
+    }
 }
