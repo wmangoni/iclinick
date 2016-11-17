@@ -5,14 +5,16 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Patient;
 use App\State;
+use App\Profession;
 
 class PatientsController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    protected $request;
+
+    public function __construct(Request $request) {
+        $this->request = $request;
+    }
+
     public function index()
     {
         $title = 'Patients';
@@ -45,7 +47,15 @@ class PatientsController extends Controller
         foreach ($statesCollection as $key => $value) {
             $states[$value->id] = $value->name;
         }
-        return view('create', compact('title', 'module', 'route', 'formulario', 'states'));
+        
+        $profs = Profession::all();
+        $profissoes['0'] = 'Selecione';
+        foreach ($profs as $key => $value) {
+            $profissoes[$value->id] = $value->name;
+        }
+        
+        
+        return view('create', compact('title', 'module', 'route', 'formulario', 'states', 'profissoes'));
     }
 
     /**

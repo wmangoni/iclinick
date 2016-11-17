@@ -32,6 +32,18 @@
         }
     }
     
+    var masks = {
+        init: function() {
+            $('.cpf-mask').mask('000.000.000-00', {reverse: false});
+            $('.phone-mask').mask('(00) 00000-0000');
+            $('.cep-mask').mask('00000-000');
+            $('.height-mask').mask('0000');
+            $('.weight-mask').mask('0000');
+            $('.data-mask').mask("00/00/0000", {placeholder: "__/__/____"});
+        }
+    }
+    
     loadCities.init();
+    masks.init();
     
 }(jQuery, window, document));
