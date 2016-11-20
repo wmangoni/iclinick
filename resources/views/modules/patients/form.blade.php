@@ -1,9 +1,13 @@
-{!! Form::open(['route' => $route ]) !!}
+@if(isset($patient->id))
+    {!! Form::model(['url' => $route, 'model' => $patient]) !!}
+@else
+    {!! Form::open(['url' => $route]) !!}
+@endif
     <div class="row">
         <div class="col-md-12">
             <div class="col-md-4">
                 {{ Form::label('name', 'Nome') }}
-                {{ Form::text('name', null, ['class' => 'form-control']) }}
+                {{ Form::text('name', old('name', isset($patient->name) ? $patient->name : '' ), ['class' => 'form-control']) }}
             </div>
             <div class="col-md-4">
                 {{ Form::label('email', 'E-mail') }}
@@ -18,12 +22,12 @@
                 {{ Form::text('address', null, ['class' => 'form-control']) }}
             </div>
             <div class="col-md-3">
-                {{ Form::label('state', 'Estado') }}
-                {{ Form::select('state', $states, null, ['class' => 'form-control']) }}
+                {{ Form::label('state_id', 'Estado') }}
+                {{ Form::select('state_id', $states, null, ['class' => 'form-control']) }}
             </div>
             <div class="col-md-3">
-                {{ Form::label('city', 'Cidade') }}
-                {{ Form::select('city', ['' => 'Selecione'], null, ['class' => 'form-control']) }}
+                {{ Form::label('city_id', 'Cidade') }}
+                {{ Form::select('city_id', ['' => 'Selecione'], null, ['class' => 'form-control']) }}
             </div>
             <div class="col-md-3">
                 {{ Form::label('zipcode', 'CEP') }}
@@ -76,6 +80,13 @@
             <div class="col-md-6">
                 {{ Form::label('mae', 'Nome da Mãe') }}
                 {{ Form::text('mae', null, ['class' => 'form-control']) }}
+            </div>
+            <div class="col-md-12">
+                {{ Form::label('obs', 'Observação') }}
+                {{ Form::textarea('obs', null, ['class' => 'form-control']) }}
+            </div>
+            <div class="col-md-12" style="margin-top: 10px;">
+                {{ Form::submit('Save', ['class' => 'btn btn-primary']) }}
             </div>
         </div>
     </div>

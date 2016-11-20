@@ -4,7 +4,7 @@
     var loadCities = {
         init: function() {
 
-            $('select[name="state"]').on('change', function() {
+            $('select[name="state_id"]').on('change', function() {
                 var id_state = $(this).val();
                 var token = $('input[name="_token"]').val();
                 
@@ -18,7 +18,7 @@
                     },
                     success: function(data) {
                         if(data.code == 200) {
-                            $('select[name="city"]').html(data.options);
+                            $('select[name="city_id"]').html(data.options);
                         } else {
                             alert('Errouuuuu');
                         }

@@ -40,7 +40,7 @@ class PatientsController extends Controller
     {
         $title = 'Patients';
         $module = 'patients';
-        $route = 'patients.store';
+        $route = route('patients.store');
         $formulario = 'modules.patients.form';
         $statesCollection = State::all();
         $states['0'] = 'Selecione';
@@ -66,7 +66,9 @@ class PatientsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $patients = new Patient($request->all());
+        $patients->save();
+        redirect('patients.index');
     }
 
     /**
@@ -88,7 +90,25 @@ class PatientsController extends Controller
      */
     public function edit($id)
     {
-        //
+        $title = 'Patients';
+        $module = 'patients';
+        $route = route('patients.update', $id);
+        $formulario = 'modules.patients.form';
+        $patient = Patient::find($id);
+        $statesCollection = State::all();
+        $states['0'] = 'Selecione';
+        foreach ($statesCollection as $key => $value) {
+            $states[$value->id] = $value->name;
+        }
+        
+        $profs = Profession::all();
+        $profissoes['0'] = 'Selecione';
+        foreach ($profs as $key => $value) {
+            $profissoes[$value->id] = $value->name;
+        }
+        
+        
+        return view('create', compact('title', 'module', 'route', 'formulario', 'states', 'profissoes', 'patient'));
     }
 
     /**
