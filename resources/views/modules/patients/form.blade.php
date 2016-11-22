@@ -1,5 +1,6 @@
 @if(isset($patient->id))
-    {!! Form::model(['url' => $route, 'model' => $patient]) !!}
+    {{ Form::model($patient, ['route' => ['patients.update', $patient->id]]) }}
+    {{ method_field('PUT') }}
 @else
     {!! Form::open(['url' => $route]) !!}
 @endif
@@ -7,7 +8,7 @@
         <div class="col-md-12">
             <div class="col-md-4">
                 {{ Form::label('name', 'Nome') }}
-                {{ Form::text('name', old('name', isset($patient->name) ? $patient->name : '' ), ['class' => 'form-control']) }}
+                {{ Form::text('name', null, ['class' => 'form-control']) }}
             </div>
             <div class="col-md-4">
                 {{ Form::label('email', 'E-mail') }}
@@ -63,7 +64,7 @@
             </div>
             <div class="col-md-3">
                 {{ Form::label('birthday', 'Data de nasc.') }}
-                {{ Form::text('birthday', null, ['class' => 'form-control data-mask']) }}
+                {{ Form::date('birthday', null, ['class' => 'form-control']) }}
             </div>
             <div class="col-md-3">
                 {{ Form::label('estado_civil', 'Estado Civil') }}

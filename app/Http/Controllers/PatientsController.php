@@ -66,9 +66,10 @@ class PatientsController extends Controller
      */
     public function store(Request $request)
     {
+        //dd($request->all());
         $patients = new Patient($request->all());
         $patients->save();
-        redirect('patients.index');
+        redirect('patients/' . $patients->id . '/edit');
     }
 
     /**
@@ -120,7 +121,9 @@ class PatientsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $patient = Patient::find($id);
+        $patient->update($request->all());
+        redirect('patients/' . $patient->id . '/edit');
     }
 
     /**

@@ -39,12 +39,13 @@ class Patient extends Model
     {
         return $this->hasMany('App\Payment');
     }
+    public function getBirthdayAttribute($value)
+    {
+        return $this->attributes['birthday'] = Carbon::parse($value)->format('d/m/Y');
+    }
     public function setBirthdayAttribute($value)
     {
-        $data = explode('/', $value);
-        $data = array_reverse($data);
-        $this->attributes['birthday'] = implode('-', $data);
-        //$this->attributes['birthday'] = Carbon::createFromFormat('Y-m-d', $value)->toDateTimeString();
+        $this->attributes['birthday'] = Carbon::parse($value)->format('Y-m-d');
     }
     protected $dates = [
         'birthday',
@@ -52,5 +53,26 @@ class Patient extends Model
         'updated_at',
         'deleted_at'
     ];
+
+    protected static $rules = [
+        'name' => 'required|min:6',
+        'address' => 'required|min:6',
+        'city_id' => 'required|numeric',
+        'state_id' => 'required|numeric',
+        'Phone' => 'required',
+        'genre' => 'required',
+        'birthday' => 'required',
+        'email' => 'required|email',
+    ];
+
+    protected static $messages = [
+        'min'    => 'O campo :attribute deve ser maior.',
+        'required' => 'O campo :attribute é obrigatório.',
+    ];
+
+    public static function validate( $data )
+    {
+        return Validator::make($data, Self::$rules, Self::$message);
+    }
     
 }
