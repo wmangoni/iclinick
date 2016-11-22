@@ -29,6 +29,15 @@
                             </ul>
                         </div>
                     @endif
+                    @if (Session::has('message'))
+                        <div class="alert {{ session('alert') }}">
+                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true"></button>
+                            @if (Session::has('alert') && session('alert') == 'alert-danger')
+                                <h4><strong>Erro na Aplicação</strong></h4>
+                            @endif
+                            {{ session('message') }}
+                        </div>
+                    @endif
                     <div class="panel-body">
                         @include($formulario)
                     </div>

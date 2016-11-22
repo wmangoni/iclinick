@@ -25,6 +25,7 @@
                             @foreach($fields as $field)
                                 <th>{{ $field }}</th>
                             @endforeach
+                            <th>Editar</th>
                             <tbody>
                                 @foreach($models as $model)
                                     <tr>
@@ -39,6 +40,7 @@
                                                 @endif
                                             @endif
                                         @endforeach
+                                        <td><a href="{{ url('patients/' . $model->id . '/edit') }}"><i class="fa fa-edit"></i> Editar</a></td>
                                     <tr>
                                 @endforeach
                             </tbody>

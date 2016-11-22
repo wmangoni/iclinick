@@ -66,10 +66,14 @@ class PatientsController extends Controller
      */
     public function store(Request $request)
     {
-        //dd($request->all());
+        $validation = Patient::validate($this->request->all());
+
+        if($validation->fails()) {
+            return redirect()->route('patients.create')->withErrors($validation)->withInput();
+        }
         $patients = new Patient($request->all());
         $patients->save();
-        redirect('patients/' . $patients->id . '/edit');
+        return redirect('patients/' . $patients->id . '/edit');
     }
 
     /**
@@ -123,7 +127,7 @@ class PatientsController extends Controller
     {
         $patient = Patient::find($id);
         $patient->update($request->all());
-        redirect('patients/' . $patient->id . '/edit');
+        return redirect('patients/' . $patient->id . '/edit');
     }
 
     /**
