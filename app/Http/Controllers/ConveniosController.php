@@ -38,7 +38,7 @@ class ConveniosController extends Controller
     {
         $title = 'Convenios';
         $module = 'convenios';
-        $route = 'convenios.store';
+        $route = route($this->module . '.store');
         $formulario = 'modules.convenios.form';
         return view('create', compact('title', 'module', 'route', 'formulario'));
     }
@@ -51,7 +51,9 @@ class ConveniosController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $convenio = new Convenio($request->all());
+        $convenio->save();
+        return redirect($this->module . '/' . $convenio->id . '/edit');
     }
 
     /**
@@ -75,11 +77,11 @@ class ConveniosController extends Controller
     {
         $title = 'Segments';
         $module = $this->module;
-        $route = route('segments.update', $id);
-        $formulario = 'modules.segments.form';
-        $segment = Segment::find($id);
+        $route = route($this->module . '.update', $id);
+        $formulario = 'modules.'.$this->module.'.form';
+        $convenio = Convenio::find($id);
 
-        return view('create', compact('title', 'module', 'route', 'formulario', 'segment'));
+        return view('create', compact('title', 'module', 'route', 'formulario', 'convenio'));
     }
 
     /**
@@ -91,7 +93,9 @@ class ConveniosController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $convenio = Convenio::find($id);
+        $convenio->update($request->all());
+        return redirect($this->module . '/' . $convenio->id . '/edit');
     }
 
     /**
@@ -102,6 +106,8 @@ class ConveniosController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $convenio = Convenio::find($id);
+        $convenio->delete();
+        return redirect($this->module);
     }
 }

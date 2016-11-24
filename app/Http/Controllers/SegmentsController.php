@@ -38,7 +38,7 @@ class SegmentsController extends Controller
     {
         $title = 'Segments';
         $module = $this->module;
-        $route = $this->module . '.store';
+        $route = route($this->module . '.store');
         $formulario = 'modules.'.$this->module.'.form';
         return view('create', compact('title', 'module', 'route', 'formulario'));
     }
@@ -78,7 +78,7 @@ class SegmentsController extends Controller
         $title = 'Segments';
         $module = $this->module;
         $route = route('segments.update', $id);
-        $formulario = 'modules.segments.form';
+        $formulario = 'modules.'.$this->module.'.form';
         $segment = Segment::find($id);
 
         return view('create', compact('title', 'module', 'route', 'formulario', 'segment'));

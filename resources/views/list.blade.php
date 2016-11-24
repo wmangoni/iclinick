@@ -22,10 +22,13 @@
                     </div>
                     <div class="panel-body">
                         <table class="table table-responsive table-striped">
-                            @foreach($fields as $field)
-                                <th>{{ $field }}</th>
-                            @endforeach
-                            <th>Editar</th>
+                            <thead>
+                                @foreach($fields as $field)
+                                    <th>{{ $field }}</th>
+                                @endforeach
+                                <th>Editar</th>
+                                <th>Excluir</th>
+                            </thead>
                             <tbody>
                                 @foreach($models as $model)
                                     <tr>
@@ -40,8 +43,18 @@
                                                 @endif
                                             @endif
                                         @endforeach
-                                            <?php $edit_link = $modulo . '/' . $model->id . '/edit' ?>
-                                        <td style="min-width: 73px;"><a href="{{ url($edit_link) }}"><i class="fa fa-edit"></i> Editar</a></td>
+                                        <?php $edit_link = $modulo . '/' . $model->id . '/edit' ?>
+                                        <td style="min-width: 73px;">
+                                            <a class="btn btn-info" href="{{ url($edit_link) }}"><i class="fa fa-edit"></i> Editar</a>
+                                        </td>
+                                        <td style="min-width: 73px;">
+                                            <form action="{{ route($modulo . '.destroy', $model->id) }}" method="POST">
+                                                {{ method_field('DELETE') }}
+                                                <button type="submit" class="btn btn-danger" href="{{ route($modulo . '.destroy', $model->id) }}">
+                                                    <i class="fa fa-trash"></i> Excluir
+                                                </button>
+                                            </form>
+                                        </td>
                                     <tr>
                                 @endforeach
                             </tbody>
