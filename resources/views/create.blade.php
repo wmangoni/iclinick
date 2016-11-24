@@ -9,6 +9,22 @@
             <!-- /.col-lg-12 -->
         </div>
         <!-- /.row -->
+
+        @if (count($errors) > 0)
+            <div class="alert alert-danger">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
+        @if (session('msg'))
+            <div class="alert alert-success">
+                {{ session('msg') }}
+            </div>
+        @endif
+
         <div class="row">
             <div class="col-lg-12">
                 <div class="panel panel-default">
@@ -20,24 +36,6 @@
                             <a href="/{{ $module }}" class="btn btn-warning pull-right">Voltar</a>
                         </div>
                     </div>
-                    @if (count($errors) > 0)
-                        <div class="alert alert-danger">
-                            <ul>
-                                @foreach ($errors->all() as $error)
-                                    <li>{{ $error }}</li>
-                                @endforeach
-                            </ul>
-                        </div>
-                    @endif
-                    @if (Session::has('message'))
-                        <div class="alert {{ session('alert') }}">
-                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true"></button>
-                            @if (Session::has('alert') && session('alert') == 'alert-danger')
-                                <h4><strong>Erro na Aplicação</strong></h4>
-                            @endif
-                            {{ session('message') }}
-                        </div>
-                    @endif
                     <div class="panel-body">
                         @include($formulario)
                     </div>

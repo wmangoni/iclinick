@@ -10,6 +10,7 @@ use App\Profession;
 class PatientsController extends Controller
 {
     protected $request;
+    private $module = 'patients';
 
     public function __construct(Request $request) {
         $this->request = $request;
@@ -18,7 +19,7 @@ class PatientsController extends Controller
     public function index()
     {
         $title = 'Patients';
-        $modulo = 'patients';
+        $modulo = $this->module;
         $models = Patient::all();
         $total = Patient::all()->count();
         $fields = [
@@ -38,9 +39,9 @@ class PatientsController extends Controller
     public function create()
     {
         $title = 'Patients';
-        $module = 'patients';
-        $route = route('patients.store');
-        $formulario = 'modules.patients.form';
+        $module = $this->module;
+        $route = route($this->module . '.store');
+        $formulario = 'modules.'.$this->module.'.form';
         $statesCollection = State::all();
         $states['0'] = 'Selecione';
         foreach ($statesCollection as $key => $value) {
@@ -72,7 +73,7 @@ class PatientsController extends Controller
         }
         $patients = new Patient($request->all());
         $patients->save();
-        return redirect('patients/' . $patients->id . '/edit');
+        return redirect($this->module . '/' . $patients->id . '/edit')->with('msg', 'Paciente criado com sucesso');;
     }
 
     /**
@@ -96,8 +97,8 @@ class PatientsController extends Controller
     {
         $title = 'Patients';
         $module = 'patients';
-        $route = route('patients.update', $id);
-        $formulario = 'modules.patients.form';
+        $route = route($this->module . '.update', $id);
+        $formulario = 'modules.'.$this->module.'.form';
         $patient = Patient::find($id);
         $statesCollection = State::all();
         $states['0'] = 'Selecione';
@@ -126,7 +127,7 @@ class PatientsController extends Controller
     {
         $patient = Patient::find($id);
         $patient->update($request->all());
-        return redirect('patients/' . $patient->id . '/edit');
+        return redirect($this->module . '/' . $patient->id . '/edit')->with('msg', 'Paciente editado com sucesso');;
     }
 
     /**
@@ -137,6 +138,7 @@ class PatientsController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Patient::destroy($id);
+        return redirect($this->module)->with('msg', 'Paciente removido com sucesso');
     }
 }

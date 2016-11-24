@@ -21,7 +21,12 @@
                         </div>
                     </div>
                     <div class="panel-body">
-                        <table class="table table-responsive table-striped">
+                        @if (session('msg'))
+                            <div class="alert alert-success">
+                                {{ session('msg') }}
+                            </div>
+                        @endif
+                        <table class="table table-responsive table-hover">
                             <thead>
                                 @foreach($fields as $field)
                                     <th>{{ $field }}</th>
@@ -50,6 +55,7 @@
                                         <td style="min-width: 73px;">
                                             <form action="{{ route($modulo . '.destroy', $model->id) }}" method="POST">
                                                 {{ method_field('DELETE') }}
+                                                <input type="hidden" name="_token" value="{{ csrf_token() }}">
                                                 <button type="submit" class="btn btn-danger" href="{{ route($modulo . '.destroy', $model->id) }}">
                                                     <i class="fa fa-trash"></i> Excluir
                                                 </button>

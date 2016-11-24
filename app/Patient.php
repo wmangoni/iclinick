@@ -4,6 +4,7 @@ namespace App;
 
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Validator;
 
 class Patient extends Model
 {
@@ -39,13 +40,13 @@ class Patient extends Model
     {
         return $this->hasMany('App\Payment');
     }
-//    public function getBirthdayAttribute($value)
-//    {
-//        return $this->attributes['birthday'] = Carbon::createFromFormat('d/m/Y', $value);
-//    }
+    public function getBirthdayAttribute($value)
+    {
+        return $this->attributes['birthday'] = Carbon::createFromFormat('d/m/Y', $value);
+    }
     public function setBirthdayAttribute($value)
     {
-        $this->attributes['birthday'] = Carbon::parse($value)->format('Y-m-d');
+        $this->attributes['birthday'] = Carbon::createFromFormat('Y-m-d', $value);
     }
 
     public function setHeightAttribute($value)
@@ -68,7 +69,7 @@ class Patient extends Model
         'address' => 'required|min:6',
         'city_id' => 'required|numeric',
         'state_id' => 'required|numeric',
-        'Phone' => 'required',
+        'phone' => 'required',
         'genre' => 'required',
         'birthday' => 'required',
         'email' => 'required|email',
@@ -81,7 +82,7 @@ class Patient extends Model
 
     public static function validate( $data )
     {
-        return Validator::make($data, Self::$rules, Self::$message);
+        return Validator::make($data, Self::$rules, Self::$messages);
     }
     
 }

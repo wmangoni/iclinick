@@ -28,7 +28,7 @@
             </div>
             <div class="col-md-3">
                 {{ Form::label('city_id', 'Cidade') }}
-                {{ Form::select('city_id', ['' => 'Selecione'], null, [ 'class' => 'form-control', 'data-id' => $patient->city_id ? $patient->city_id : 0 ]) }}
+                {{ Form::select('city_id', ['' => 'Selecione'], null, [ 'class' => 'form-control', 'data-id' => isset($patient->city_id) ? $patient->city_id : 0 ]) }}
             </div>
             <div class="col-md-3">
                 {{ Form::label('zipcode', 'CEP') }}
