@@ -39,16 +39,25 @@ class Patient extends Model
     {
         return $this->hasMany('App\Payment');
     }
-    public function getBirthdayAttribute($value)
-    {
-        return $this->attributes['birthday'] = Carbon::parse($value)->format('d/m/Y');
-    }
+//    public function getBirthdayAttribute($value)
+//    {
+//        return $this->attributes['birthday'] = Carbon::createFromFormat('d/m/Y', $value);
+//    }
     public function setBirthdayAttribute($value)
     {
         $this->attributes['birthday'] = Carbon::parse($value)->format('Y-m-d');
     }
+
+    public function setHeightAttribute($value)
+    {
+        $this->attributes['height'] = ($value == '') ? NULL : $value;
+    }
+    public function setWeightAttribute($value)
+    {
+        $this->attributes['weight'] = ($value == '') ? NULL : $value;
+    }
+
     protected $dates = [
-        'birthday',
         'created_at',
         'updated_at',
         'deleted_at'

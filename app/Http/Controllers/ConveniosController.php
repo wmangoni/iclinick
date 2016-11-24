@@ -7,6 +7,7 @@ use App\Convenio;
 
 class ConveniosController extends Controller
 {
+    private $module = 'convenios';
     /**
      * Display a listing of the resource.
      *
@@ -72,7 +73,13 @@ class ConveniosController extends Controller
      */
     public function edit($id)
     {
-        //
+        $title = 'Segments';
+        $module = $this->module;
+        $route = route('segments.update', $id);
+        $formulario = 'modules.segments.form';
+        $segment = Segment::find($id);
+
+        return view('create', compact('title', 'module', 'route', 'formulario', 'segment'));
     }
 
     /**

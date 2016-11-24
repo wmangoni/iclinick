@@ -42,7 +42,7 @@
                         @include($formulario)
                     </div>
                     <div class="panel-footer">
-                        Fotter
+                        Footer
                     </div>
                 </div>
             </div>

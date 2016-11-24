@@ -7,6 +7,7 @@ use App\Segment;
 
 class SegmentsController extends Controller
 {
+    private $module = 'segments';
     /**
      * Display a listing of the resource.
      *
@@ -15,7 +16,7 @@ class SegmentsController extends Controller
     public function index()
     {
         $title = 'Segments';
-        $modulo = 'segments';
+        $modulo = $this->module;
         $models = Segment::all();
         $total = Segment::all()->count();
         $fields = [
@@ -36,9 +37,9 @@ class SegmentsController extends Controller
     public function create()
     {
         $title = 'Segments';
-        $module = 'segments';
-        $route = 'segments.store';
-        $formulario = 'modules.segments.form';
+        $module = $this->module;
+        $route = $this->module . '.store';
+        $formulario = 'modules.'.$this->module.'.form';
         return view('create', compact('title', 'module', 'route', 'formulario'));
     }
 
@@ -50,7 +51,9 @@ class SegmentsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $segment = new Segment($request->all());
+        $segment->save();
+        return redirect($this->module . '/' . $segment->id . '/edit');
     }
 
     /**
@@ -72,7 +75,13 @@ class SegmentsController extends Controller
      */
     public function edit($id)
     {
-        //
+        $title = 'Segments';
+        $module = $this->module;
+        $route = route('segments.update', $id);
+        $formulario = 'modules.segments.form';
+        $segment = Segment::find($id);
+
+        return view('create', compact('title', 'module', 'route', 'formulario', 'segment'));
     }
 
     /**
@@ -84,7 +93,9 @@ class SegmentsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $segment = Segment::find($id);
+        $segment->update($request->all());
+        return redirect($this->module . '/' . $segment->id . '/edit');
     }
 
     /**

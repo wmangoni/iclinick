@@ -24,8 +24,7 @@ class PatientsController extends Controller
         $fields = [
             'name',
             'address',
-            'Phone',
-            'cpf',
+            'phone',
             'email'
         ];
         return view('list', compact('title', 'models', 'total', 'fields', 'modulo'));

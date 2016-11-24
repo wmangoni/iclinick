@@ -1,34 +1,55 @@
 (function($, window, document, undefined) {
     "use strict";
-    
+
+    function loadCity(id_state) {
+
+        var token = $('input[name="_token"]').val();
+
+        $.ajax({
+            url: $('body').data('src') + '/load-cidades',
+            type: 'POST',
+            dataType: 'json',
+            data: {id_state: id_state, _token: token},
+            beforeSend: function() {
+                console.log('init');
+            },
+            success: function(data) {
+                if(data.code == 200) {
+                    $('select[name="city_id"]').html(data.options);
+                } else {
+                    alert('Errouuuuu');
+                }
+            },
+            error: function(x) {
+                console.log('erro');
+                console.log(x);
+            }
+        });
+    }
+
     var loadCities = {
         init: function() {
+            var state_id = $('select[name="state_id"]').val();
+            var city_id = $('select[name="city_id"]').data('id');
+
+            if (state_id != '' && state_id != 0) {
+                loadCity(state_id);
+            }
 
             $('select[name="state_id"]').on('change', function() {
                 var id_state = $(this).val();
-                var token = $('input[name="_token"]').val();
-                
-                $.ajax({
-                    url: $('body').data('src') + '/load-cidades',
-                    type: 'POST',
-                    dataType: 'json',
-                    data: {id_state: id_state, _token: token},
-                    beforeSend: function() {
-                        console.log('init');
-                    },
-                    success: function(data) {
-                        if(data.code == 200) {
-                            $('select[name="city_id"]').html(data.options);
-                        } else {
-                            alert('Errouuuuu');
-                        }
-                    },
-                    error: function(x) {
-                        console.log('erro');
-                        console.log(x);
+                loadCity(id_state);
+            });
+
+            if (city_id != 0) {
+                console.log('caiu no if');
+                //$('select[name="city_id"] option[value="'+city_id+'"]').attr('selected', true);
+                $('select[name="city_id"] option').on('each', function() {
+                    if ($(this).val() == city_id) {
+                        $(this).attr('selected', true);
                     }
                 });
-            });
+            }
         }
     }
     

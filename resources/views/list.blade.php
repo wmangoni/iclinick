@@ -40,7 +40,8 @@
                                                 @endif
                                             @endif
                                         @endforeach
-                                        <td><a href="{{ url('patients/' . $model->id . '/edit') }}"><i class="fa fa-edit"></i> Editar</a></td>
+                                            <?php $edit_link = $modulo . '/' . $model->id . '/edit' ?>
+                                        <td style="min-width: 73px;"><a href="{{ url($edit_link) }}"><i class="fa fa-edit"></i> Editar</a></td>
                                     <tr>
                                 @endforeach
                             </tbody>

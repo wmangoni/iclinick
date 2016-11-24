@@ -1,9 +1,9 @@
-@if(isset($patient->id))
-    {{ Form::model($patient, ['route' => ['patients.update', $patient->id]]) }}
-    {{ method_field('PUT') }}
-@else
-    {!! Form::open(['url' => $route]) !!}
-@endif
+    @if(isset($patient->id))
+        {{ Form::model($patient, ['route' => ['patients.update', $patient->id]]) }}
+        {{ method_field('PUT') }}
+    @else
+        {!! Form::open(['url' => $route]) !!}
+    @endif
     <div class="row">
         <div class="col-md-12">
             <div class="col-md-4">
@@ -28,7 +28,7 @@
             </div>
             <div class="col-md-3">
                 {{ Form::label('city_id', 'Cidade') }}
-                {{ Form::select('city_id', ['' => 'Selecione'], null, ['class' => 'form-control']) }}
+                {{ Form::select('city_id', ['' => 'Selecione'], null, [ 'class' => 'form-control', 'data-id' => $patient->city_id ? $patient->city_id : 0 ]) }}
             </div>
             <div class="col-md-3">
                 {{ Form::label('zipcode', 'CEP') }}
@@ -64,7 +64,7 @@
             </div>
             <div class="col-md-3">
                 {{ Form::label('birthday', 'Data de nasc.') }}
-                {{ Form::date('birthday', null, ['class' => 'form-control']) }}
+                {{ Form::text('birthday', null, ['class' => 'form-control']) }}
             </div>
             <div class="col-md-3">
                 {{ Form::label('estado_civil', 'Estado Civil') }}

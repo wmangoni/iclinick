@@ -1,4 +1,9 @@
-{!! Form::open(['route' => $route ]) !!}
+@if(isset($segment->id))
+    {{ Form::model($segment, ['route' => ['segments.update', $segment->id]]) }}
+    {{ method_field('PUT') }}
+@else
+    {!! Form::open(['url' => $route]) !!}
+@endif
     <div class="row">
         <div class="col-md-12">
             <div class="col-md-6">
@@ -8,6 +13,9 @@
             <div class="col-md-6">
                 {{ Form::label('description', 'Descrição') }}
                 {{ Form::text('description', null, ['class' => 'form-control']) }}
+            </div>
+            <div class="col-md-12" style="margin-top: 10px;">
+                {{ Form::submit('Save', ['class' => 'btn btn-primary']) }}
             </div>
         </div>
     </div>
