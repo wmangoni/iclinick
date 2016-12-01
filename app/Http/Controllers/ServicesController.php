@@ -7,6 +7,8 @@ use App\Service;
 
 class ServicesController extends Controller
 {
+    private $module = 'services';
+
     /**
      * Display a listing of the resource.
      *
@@ -35,7 +37,11 @@ class ServicesController extends Controller
      */
     public function create()
     {
-        //
+        $title = 'Services';
+        $module = $this->module;
+        $route = route($this->module . '.store');
+        $formulario = 'modules.'.$this->module.'.form';
+        return view('create', compact('title', 'module', 'route', 'formulario'));
     }
 
     /**
@@ -46,7 +52,9 @@ class ServicesController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $service = new Service($request->all());
+        $service->save();
+        return redirect($this->module . '/' . $service->id . '/edit');
     }
 
     /**
@@ -68,7 +76,13 @@ class ServicesController extends Controller
      */
     public function edit($id)
     {
-        //
+        $title = 'Services';
+        $module = $this->module;
+        $route = route($this->module.'.update', $id);
+        $formulario = 'modules.'.$this->module.'.form';
+        $service = Service::find($id);
+
+        return view('create', compact('title', 'module', 'route', 'formulario', 'service'));
     }
 
     /**
@@ -80,7 +94,9 @@ class ServicesController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $service = Service::find($id);
+        $service->update($request->all());
+        return redirect($this->module . '/' . $service->id . '/edit');
     }
 
     /**
@@ -91,6 +107,7 @@ class ServicesController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Service::destroy($id);
+        return redirect($this->module)->with('msg', 'Serviço removido com sucesso');
     }
 }

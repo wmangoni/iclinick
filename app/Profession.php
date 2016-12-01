@@ -10,4 +10,9 @@ class Profession extends Model
     	'name',
 		'description'
 	];
+    protected $dates = [
+        'created_at',
+        'updated_at',
+        'deleted_at'
+    ];
 }

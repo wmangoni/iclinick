@@ -42,11 +42,15 @@ class Patient extends Model
     }
     public function getBirthdayAttribute($value)
     {
-        return $this->attributes['birthday'] = Carbon::createFromFormat('d/m/Y', $value);
+        $data = explode('-', $value);
+        $data = implode('/', array_reverse($data));
+        return $this->attributes['birthday'] = $data;
     }
     public function setBirthdayAttribute($value)
     {
-        $this->attributes['birthday'] = Carbon::createFromFormat('Y-m-d', $value);
+        $data = explode('/', $value);
+        $data = implode('-', array_reverse($data));
+        $this->attributes['birthday'] = $data;
     }
 
     public function setHeightAttribute($value)

@@ -7,6 +7,8 @@ use App\Medicine;
 
 class MedicinesController extends Controller
 {
+    private $module = 'medicines';
+
     /**
      * Display a listing of the resource.
      *
@@ -35,7 +37,11 @@ class MedicinesController extends Controller
      */
     public function create()
     {
-        //
+        $title = 'Medicines';
+        $module = $this->module;
+        $route = route($this->module . '.store');
+        $formulario = 'modules.'.$this->module.'.form';
+        return view('create', compact('title', 'module', 'route', 'formulario'));
     }
 
     /**
@@ -46,7 +52,9 @@ class MedicinesController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $medicine = new Medicine($request->all());
+        $medicine->save();
+        return redirect($this->module . '/' . $medicine->id . '/edit');
     }
 
     /**
@@ -68,7 +76,13 @@ class MedicinesController extends Controller
      */
     public function edit($id)
     {
-        //
+        $title = 'Medicines';
+        $module = $this->module;
+        $route = route($this->module.'.update', $id);
+        $formulario = 'modules.'.$this->module.'.form';
+        $medicine = Medicine::find($id);
+
+        return view('create', compact('title', 'module', 'route', 'formulario', 'medicine'));
     }
 
     /**
@@ -80,7 +94,9 @@ class MedicinesController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $medicine = Medicine::find($id);
+        $medicine->update($request->all());
+        return redirect($this->module . '/' . $medicine->id . '/edit');
     }
 
     /**
@@ -91,6 +107,6 @@ class MedicinesController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Medicine::destroy($id);
     }
 }

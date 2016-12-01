@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Patient;
 use Illuminate\Http\Request;
 use App\Payment;
 
 class PaymentsController extends Controller
 {
+    private $module = 'payments';
     /**
      * Display a listing of the resource.
      *
@@ -35,7 +37,16 @@ class PaymentsController extends Controller
      */
     public function create()
     {
-        //
+        $title = 'Payments';
+        $module = $this->module;
+        $pats = Patient::all();
+        $patients['0'] = 'Selecione';
+        foreach ($pats as $key => $value) {
+            $patients[$value->id] = $value->name;
+        }
+        $route = route($this->module . '.store');
+        $formulario = 'modules.'.$this->module.'.form';
+        return view('create', compact('title', 'module', 'route', 'formulario', 'patients'));
     }
 
     /**
@@ -46,7 +57,9 @@ class PaymentsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $payment = new Payment($request->all());
+        $payment->save();
+        return redirect($this->module . '/' . $payment->id . '/edit');
     }
 
     /**
@@ -68,7 +81,18 @@ class PaymentsController extends Controller
      */
     public function edit($id)
     {
-        //
+        $title = 'Payments';
+        $module = $this->module;
+        $pats = Patient::all();
+        $patients['0'] = 'Selecione';
+        foreach ($pats as $key => $value) {
+            $patients[$value->id] = $value->name;
+        }
+        $route = route($this->module.'.update', $id);
+        $formulario = 'modules.'.$this->module.'.form';
+        $payment = Payment::find($id);
+
+        return view('create', compact('title', 'module', 'route', 'formulario', 'payment', 'patients'));
     }
 
     /**
@@ -80,7 +104,9 @@ class PaymentsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $payment = Payment::find($id);
+        $payment->update($request->all());
+        return redirect($this->module . '/' . $payment->id . '/edit');
     }
 
     /**
@@ -91,6 +117,7 @@ class PaymentsController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Payment::destroy($id);
+        return redirect($this->module)->with('msg', 'Pagamento removido com sucesso');
     }
 }

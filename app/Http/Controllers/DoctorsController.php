@@ -114,6 +114,7 @@ class DoctorsController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Doctor::destroy($id);
+        return redirect($this->module)->with('msg', 'Doutor removido com sucesso');
     }
 }

@@ -8,6 +8,7 @@ use App\Segment;
 class SegmentsController extends Controller
 {
     private $module = 'segments';
+
     /**
      * Display a listing of the resource.
      *
@@ -106,6 +107,7 @@ class SegmentsController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Segment::destroy($id);
+        return redirect($this->module)->with('msg', 'Segmento removido com sucesso');
     }
 }

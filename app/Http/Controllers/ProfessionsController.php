@@ -9,6 +9,8 @@ use App\Profession;
 
 class ProfessionsController extends Controller
 {
+    private $module = 'professions';
+
     /**
      * Display a listing of the resource.
      *
@@ -17,7 +19,7 @@ class ProfessionsController extends Controller
     public function index()
     {
         $title = 'Professions';
-        $modulo = 'professions';
+        $modulo = $this->module;
         $models = Profession::all();
         $total = Profession::all()->count();
         $fields = [
@@ -37,7 +39,11 @@ class ProfessionsController extends Controller
      */
     public function create()
     {
-        //
+        $title = 'Professions';
+        $module = $this->module;
+        $route = route($this->module . '.store');
+        $formulario = 'modules.'.$this->module.'.form';
+        return view('create', compact('title', 'module', 'route', 'formulario'));
     }
 
     /**
@@ -48,7 +54,9 @@ class ProfessionsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $profession = new Profession($request->all());
+        $profession->save();
+        return redirect($this->module . '/' . $profession->id . '/edit');
     }
 
     /**
@@ -70,7 +78,13 @@ class ProfessionsController extends Controller
      */
     public function edit($id)
     {
-        //
+        $title = 'Segments';
+        $module = $this->module;
+        $route = route($this->module.'.update', $id);
+        $formulario = 'modules.'.$this->module.'.form';
+        $profession = Profession::find($id);
+
+        return view('create', compact('title', 'module', 'route', 'formulario', 'profession'));
     }
 
     /**
@@ -82,7 +96,9 @@ class ProfessionsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $profession = Profession::find($id);
+        $profession->update($request->all());
+        return redirect($this->module . '/' . $profession->id . '/edit');
     }
 
     /**
@@ -93,6 +109,7 @@ class ProfessionsController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Profession::destroy($id);
+        return redirect($this->module)->with('msg', 'Profissão removida com sucesso');
     }
 }
