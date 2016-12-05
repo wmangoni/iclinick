@@ -29,6 +29,9 @@ class Kernel extends HttpKernel
             \Illuminate\Session\Middleware\StartSession::class,
             \Illuminate\View\Middleware\ShareErrorsFromSession::class,
             \App\Http\Middleware\VerifyCsrfToken::class,
+            \App\Http\Middleware\DoctorVision::class,
+            \App\Http\Middleware\AfterDoctorVision::class,
+            \App\Http\Middleware\AdminVision::class,
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
         ],
 
@@ -52,5 +55,8 @@ class Kernel extends HttpKernel
         'can' => \Illuminate\Auth\Middleware\Authorize::class,
         'guest' => \App\Http\Middleware\RedirectIfAuthenticated::class,
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
+        'doctor_vision' => \App\Http\Middleware\DoctorVision::class,
+        'a_doctor_vision' => \App\Http\Middleware\AfterDoctorVision::class,
+        'admin_vision' => \App\Http\Middleware\AdminVision::class,
     ];
 }

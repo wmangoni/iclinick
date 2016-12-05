@@ -1,5 +1,5 @@
 <li class="dropdown">
-    <a class="dropdown-toggle" data-toggle="dropdown" href="#" title="{{ Auth::user()->name }}">
+    <a class="dropdown-toggle" data-toggle="dropdown" href="#" title="{{ session('user_name', '') }}">
         <i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>
     </a>
     <ul class="dropdown-menu dropdown-user">

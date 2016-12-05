@@ -64,6 +64,7 @@
 
                 <!-- Right Side Of Navbar -->
                 <ul class="nav navbar-nav navbar-right">
+                    <li>Tipo -- {{ session('user_type') }}</li>
                     <!-- Authentication Links -->
                     @include('components.message')
                     @include('components.tasks')

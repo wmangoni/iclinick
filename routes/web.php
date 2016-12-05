@@ -24,17 +24,23 @@ Route::get('/register', function () {
 Route::group(['middleware' => 'auth'], function () {
     Route::get('/', [ 'as' => 'home.index', 'uses' => 'HomeController@index']);
     Route::get('/home', [ 'as' => 'home.index', 'uses' => 'HomeController@index']);
-    Route::resource('/doctors', 'DoctorsController');
-    Route::resource('/patients', 'PatientsController');
-    Route::resource('/payments', 'PaymentsController');
-    Route::resource('/schedule', 'ScheduleController');
-    Route::resource('/medicines', 'MedicinesController');
-    Route::resource('/segments', 'SegmentsController');
-    Route::resource('/convenios', 'ConveniosController');
-    Route::resource('/exams', 'ExamsController');
-    Route::resource('/services', 'ServicesController');
-    Route::resource('/professions', 'ProfessionsController');
-    
+
+    Route::group(['middleware' => array('admin_vision')], function(){
+        Route::resource('/doctors', 'DoctorsController');
+    });
+
+    Route::group(['middleware' => array('a_doctor_vision')], function(){
+        Route::resource('/patients', 'PatientsController');
+        Route::resource('/payments', 'PaymentsController');
+        Route::resource('/schedule', 'ScheduleController');
+        Route::resource('/medicines', 'MedicinesController');
+        Route::resource('/segments', 'SegmentsController');
+        Route::resource('/convenios', 'ConveniosController');
+        Route::resource('/exams', 'ExamsController');
+        Route::resource('/services', 'ServicesController');
+        Route::resource('/professions', 'ProfessionsController');
+    });
+
     //Routs to AJAX
     Route::post('/load-cidades', [ 'as' => 'load-cidades', 'uses' => 'CitiesController@loadCidades']);
 });
