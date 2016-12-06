@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<!--suppress ALL -->
 <html lang="en">
 <head>
     <meta charset="utf-8">
@@ -29,6 +30,8 @@
         <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
+
+    <script src="https://use.fontawesome.com/470fa0741e.js"></script>
 
     <!-- Scripts -->
     <script>
@@ -64,7 +67,6 @@
 
                 <!-- Right Side Of Navbar -->
                 <ul class="nav navbar-nav navbar-right">
-                    <li>Tipo -- {{ session('user_type') }}</li>
                     <!-- Authentication Links -->
                     @include('components.message')
                     @include('components.tasks')

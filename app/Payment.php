@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Scopes\OwnerPaymentScope;
 use Illuminate\Database\Eloquent\Model;
 
 class Payment extends Model
@@ -16,5 +17,11 @@ class Payment extends Model
     public function patient()
     {
         return $this->belongsTo('App\Patient');
+    }
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::addGlobalScope(new OwnerPaymentScope);
     }
 }

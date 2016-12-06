@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Scopes\OwnerScope;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Validator;
@@ -88,5 +89,11 @@ class Patient extends Model
     {
         return Validator::make($data, Self::$rules, Self::$messages);
     }
-    
+
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::addGlobalScope(new OwnerScope);
+    }
 }

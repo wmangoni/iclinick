@@ -25,11 +25,11 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/', [ 'as' => 'home.index', 'uses' => 'HomeController@index']);
     Route::get('/home', [ 'as' => 'home.index', 'uses' => 'HomeController@index']);
 
-    Route::group(['middleware' => array('admin_vision')], function(){
+    Route::group(['middleware' => ['admin_vision']], function(){
         Route::resource('/doctors', 'DoctorsController');
     });
 
-    Route::group(['middleware' => array('a_doctor_vision')], function(){
+    Route::group(['middleware' => ['doctor_vision']], function(){
         Route::resource('/patients', 'PatientsController');
         Route::resource('/payments', 'PaymentsController');
         Route::resource('/schedule', 'ScheduleController');

@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Scopes\OwnerScope;
 use Illuminate\Database\Eloquent\Model;
 
 class Exam extends Model
@@ -12,4 +13,10 @@ class Exam extends Model
         'Company',
         'text_memo'
     ];
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::addGlobalScope(new OwnerScope);
+    }
 }

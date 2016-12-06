@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Scopes\OwnerScope;
 use Illuminate\Database\Eloquent\Model;
 
 class Schedule extends Model
@@ -16,4 +17,11 @@ class Schedule extends Model
         'Obs'
     ];
     protected $table = 'schedule';
+
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::addGlobalScope(new OwnerScope);
+    }
 }

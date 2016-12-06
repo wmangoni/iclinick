@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Scopes\OwnerScope;
 use Illuminate\Database\Eloquent\Model;
 
 class Profession extends Model
@@ -15,4 +16,10 @@ class Profession extends Model
         'updated_at',
         'deleted_at'
     ];
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::addGlobalScope(new OwnerScope);
+    }
 }

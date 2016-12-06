@@ -29,7 +29,11 @@
                         <table class="table table-responsive table-hover">
                             <thead>
                                 @foreach($fields as $field)
-                                    <th>{{ $field }}</th>
+                                    @if($field == 'obs' || $field == 'description')
+                                        <th style="width: 380px;">{{ $field }}</th>
+                                    @else
+                                        <th>{{ $field }}</th>
+                                    @endif
                                 @endforeach
                                 <th>Editar</th>
                                 <th>Excluir</th>
