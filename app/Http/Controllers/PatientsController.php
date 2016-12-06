@@ -72,6 +72,7 @@ class PatientsController extends Controller
             return redirect()->route('patients.create')->withErrors($validation)->withInput();
         }
         $patients = new Patient($request->all());
+        $patients->doctor_id = session('user_id');
         $patients->save();
         return redirect($this->module . '/' . $patients->id . '/edit')->with('msg', 'Paciente criado com sucesso');;
     }

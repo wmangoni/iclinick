@@ -53,6 +53,7 @@ class SegmentsController extends Controller
     public function store(Request $request)
     {
         $segment = new Segment($request->all());
+        $segment->doctor_id = session('user_id');
         $segment->save();
         return redirect($this->module . '/' . $segment->id . '/edit');
     }

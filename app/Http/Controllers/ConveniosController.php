@@ -52,6 +52,7 @@ class ConveniosController extends Controller
     public function store(Request $request)
     {
         $convenio = new Convenio($request->all());
+        $convenio->doctor_id = session('user_id');
         $convenio->save();
         return redirect($this->module . '/' . $convenio->id . '/edit');
     }

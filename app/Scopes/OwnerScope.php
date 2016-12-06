@@ -17,6 +17,7 @@ class OwnerScope implements Scope
      */
     public function apply(Builder $builder, Model $model)
     {
-        $builder->where('doctor_id', session('user_id'));
+        if (session('user_type') != 1)
+            $builder->where('doctor_id', session('user_id'));
     }
 }

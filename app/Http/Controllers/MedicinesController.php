@@ -53,6 +53,7 @@ class MedicinesController extends Controller
     public function store(Request $request)
     {
         $medicine = new Medicine($request->all());
+        $medicine->doctor_id = session('user_id');
         $medicine->save();
         return redirect($this->module . '/' . $medicine->id . '/edit');
     }

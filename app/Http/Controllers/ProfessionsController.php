@@ -55,6 +55,7 @@ class ProfessionsController extends Controller
     public function store(Request $request)
     {
         $profession = new Profession($request->all());
+        $profession->doctor_id = session('user_id');
         $profession->save();
         return redirect($this->module . '/' . $profession->id . '/edit');
     }

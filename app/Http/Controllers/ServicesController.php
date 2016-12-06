@@ -53,6 +53,7 @@ class ServicesController extends Controller
     public function store(Request $request)
     {
         $service = new Service($request->all());
+        $service->doctor_id = session('user_id');
         $service->save();
         return redirect($this->module . '/' . $service->id . '/edit');
     }
