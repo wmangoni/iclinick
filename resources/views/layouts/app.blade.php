@@ -11,7 +11,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>{{ config('app.name', 'iClinic') }}</title>
 
     <!-- Styles -->
     <!-- Bootstrap Core CSS -->
@@ -54,7 +54,7 @@
                 </button>
                 <!-- Branding Image -->
                 <a class="navbar-brand" href="{{ url('/') }}">
-                    {{ config('app.name', 'Laravel') }}
+                    {{ config('app.name', 'iClinic') }}
                 </a>
             </div>
             <!-- /.navbar-header -->

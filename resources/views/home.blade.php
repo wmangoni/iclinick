@@ -112,20 +112,20 @@
                             <ul class="nav nav-pills">
                                 @foreach($services as $key => $value)
                                     @if($key == 0)
-                                        <li class="active"><a href="#id{{ $key }}" data-toggle="tab">{{ $value->name }}</a></li>
+                                        <li class="active"><a href="#cod{{ $key }}" data-toggle="tab">{{ $value->name }}</a></li>
                                     @else
-                                        <li><a href="#id{{ $key }}" data-toggle="tab">{{ $value->name }}</a></li>
+                                        <li><a href="#cod{{ $key }}" data-toggle="tab">{{ $value->name }}</a></li>
                                     @endif
                                 @endforeach
                             </ul>
 
                             <!-- Tab panes -->
                             <div class="tab-content">
-                                @foreach($segments as $key => $value)
+                                @foreach($services as $key => $value)
                                     @if($key == 0)
-                                        <div class="tab-pane fade in active" id="id{{ $key }}">
+                                        <div class="tab-pane fade in active" id="cod{{ $key }}">
                                     @else
-                                        <div class="tab-pane fade" id="id{{ $key }}">
+                                        <div class="tab-pane fade" id="cod{{ $key }}">
                                     @endif
                                         <h4>{{ $value->name }}</h4>
                                         <p>{{ $value->description }}</p>

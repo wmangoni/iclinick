@@ -13,34 +13,42 @@
 
 Auth::routes();
 
-Route::get('/login', function () {
-    return view('auth.login');
+Route::get('/', function () {
+    return view('site.index');
 });
 
-Route::get('/register', function () {
-    return view('auth.register');
-});
 
-Route::group(['middleware' => 'auth'], function () {
-    Route::get('/', [ 'as' => 'home.index', 'uses' => 'HomeController@index']);
-    Route::get('/home', [ 'as' => 'home.index', 'uses' => 'HomeController@index']);
+Route::group(['prefix' => 'adm'], function () {
 
-    Route::group(['middleware' => ['admin_vision']], function(){
-        Route::resource('/doctors', 'DoctorsController');
+    Route::get('/login', function () {
+        return view('auth.login');
     });
 
-    Route::group(['middleware' => ['doctor_vision']], function(){
-        Route::resource('/patients', 'PatientsController');
-        Route::resource('/payments', 'PaymentsController');
-        Route::resource('/schedule', 'ScheduleController');
-        Route::resource('/medicines', 'MedicinesController');
-        Route::resource('/segments', 'SegmentsController');
-        Route::resource('/convenios', 'ConveniosController');
-        Route::resource('/exams', 'ExamsController');
-        Route::resource('/services', 'ServicesController');
-        Route::resource('/professions', 'ProfessionsController');
+    Route::get('/register', function () {
+        return view('auth.register');
     });
 
-    //Routs to AJAX
-    Route::post('/load-cidades', [ 'as' => 'load-cidades', 'uses' => 'CitiesController@loadCidades']);
+    Route::group(['middleware' => 'auth'], function () {
+        Route::get('/', [ 'as' => 'home.index', 'uses' => 'HomeController@index']);
+        Route::get('/home', [ 'as' => 'home.index', 'uses' => 'HomeController@index']);
+
+        Route::group(['middleware' => ['admin_vision']], function(){
+            Route::resource('/doctors', 'DoctorsController');
+        });
+
+        Route::group(['middleware' => ['doctor_vision']], function(){
+            Route::resource('/patients', 'PatientsController');
+            Route::resource('/payments', 'PaymentsController');
+            Route::resource('/schedule', 'ScheduleController');
+            Route::resource('/medicines', 'MedicinesController');
+            Route::resource('/segments', 'SegmentsController');
+            Route::resource('/convenios', 'ConveniosController');
+            Route::resource('/exams', 'ExamsController');
+            Route::resource('/services', 'ServicesController');
+            Route::resource('/professions', 'ProfessionsController');
+        });
+
+        //Routs to AJAX
+        Route::post('/load-cidades', [ 'as' => 'load-cidades', 'uses' => 'CitiesController@loadCidades']);
+    });
 });
