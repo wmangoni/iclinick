@@ -6,7 +6,7 @@
         var token = $('input[name="_token"]').val();
 
         $.ajax({
-            url: $('body').data('src') + '/load-cidades',
+            url: $('body').data('src') + '/adm/load-cidades',
             type: 'POST',
             dataType: 'json',
             data: {id_state: id_state, _token: token},

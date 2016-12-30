@@ -62,7 +62,7 @@ class PatientsController extends Controller
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function store(Request $request)
     {
@@ -113,7 +113,6 @@ class PatientsController extends Controller
             $profissoes[$value->id] = $value->name;
         }
         
-        
         return view('create', compact('title', 'module', 'route', 'formulario', 'states', 'profissoes', 'patient'));
     }
 
@@ -128,7 +127,7 @@ class PatientsController extends Controller
     {
         $patient = Patient::find($id);
         $patient->update($request->all());
-        return redirect($this->module . '/' . $patient->id . '/edit')->with('msg', 'Paciente editado com sucesso');;
+        return back()->with('msg', 'Paciente editado com sucesso');
     }
 
     /**
@@ -140,6 +139,6 @@ class PatientsController extends Controller
     public function destroy($id)
     {
         Patient::destroy($id);
-        return redirect($this->module)->with('msg', 'Paciente removido com sucesso');
+        return redirect()->route($this->module)->with('msg', 'Paciente removido com sucesso');
     }
 }

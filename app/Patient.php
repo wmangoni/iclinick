@@ -15,9 +15,9 @@ class Patient extends Model
         'city_id',
         'state_id',
         'zipcode',
-        'Phone',
-        'Phone_comercial',
-        'Phone_cel',
+        'phone',
+        'phone_comercial',
+        'phone_cel',
         'prof_id',
         'genre',
         'height',
@@ -30,7 +30,7 @@ class Patient extends Model
         'cpf',
         'email',
         'pass',
-        'Obs'
+        'obs'
 	];
 
 	protected $hidden = [
