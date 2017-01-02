@@ -4,7 +4,7 @@
     </a>
     <ul class="dropdown-menu dropdown-user">
         <li><a href="#"><i class="fa fa-user fa-fw"></i> User Profile</a></li>
-        <li><a href="{{ route( 'config.index' ) }}"><i class="fa fa-gear fa-fw"></i> Settings</a></li>
+        <li><a href="{{ route( 'config.index' ) }}"><i class="fa fa-gear fa-spin fa-fw"></i> Settings</a></li>
         <li class="divider"></li>
         <li>
         	<a href="{{ url('/logout') }}" onclick="event.preventDefault();document.getElementById('logout-form').submit();">

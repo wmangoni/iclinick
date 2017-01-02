@@ -5,18 +5,12 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Convenio;
 use Gate;
+use Illuminate\Support\Facades\Auth;
 
 class ConveniosController extends Controller
 {
     private $module = 'convenios';
     private $module_id = 2;
-
-    public function __construct()
-    {
-        if (Gate::denies('permission-to-show', session('user_id'), $this->module_id)) {
-            abort(403, 'Você não tem permissão para realizar esta ação');
-        }
-    }
 
     /**
      * Display a listing of the resource.
@@ -25,6 +19,9 @@ class ConveniosController extends Controller
      */
     public function index()
     {
+        if (Gate::denies('permission-to-show', session('user_id'), $this->module_id)) {
+            abort(403, 'Você não tem permissão para realizar esta ação');
+        }
         $title = 'Convenios';
         $modulo = 'convenios';
         $models = Convenio::all();
@@ -46,6 +43,10 @@ class ConveniosController extends Controller
      */
     public function create()
     {
+        if (Gate::denies('permission-to-insert', session('user_id'), $this->module_id)) {
+            abort(403, 'Você não tem permissão para realizar esta ação');
+        }
+
         $title = 'Convenios';
         $module = 'convenios';
         $route = route($this->module . '.store');
@@ -68,7 +69,7 @@ class ConveniosController extends Controller
         $convenio = new Convenio($request->all());
         $convenio->doctor_id = session('user_id');
         $convenio->save();
-        return redirect('adm' . $this->module . '/' . $convenio->id . '/edit');
+        return redirect('adm/' . $this->module . '/' . $convenio->id . '/edit');
     }
 
     /**

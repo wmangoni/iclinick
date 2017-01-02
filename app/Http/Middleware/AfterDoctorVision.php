@@ -20,10 +20,15 @@ class AfterDoctorVision
         if (!is_null(Auth::user())) {
             $user = DB::table('users')->where('email', Auth::user()->email)->get()->toArray();
             $user = $user[0];
-            session(['user_id' => $user->id, 'user_name' => $user->name, 'user_email' => $user->email, 'user_type' => $user->type]);
+            session([
+                'user_id' => $user->id,
+                'user_name' => $user->name,
+                'user_email' => $user->email,
+                'user_type' => $user->type
+            ]);
 
             if(session('user_type') > 2)
-                return response()->view('errors.denied', ['name' => session('user_name') ], 500);
+                return response()->view('errors.denied', ['name' => session('user_name') ], 403);
         }
 
         return $next($request);

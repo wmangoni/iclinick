@@ -53,6 +53,7 @@ class AuthServiceProvider extends ServiceProvider
 
         if ($permission) {
 
+
             if ($permission[$action] == 1)
                 return TRUE;
 

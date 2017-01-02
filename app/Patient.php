@@ -5,10 +5,13 @@ namespace App;
 use App\Scopes\OwnerScope;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Validator;
 
 class Patient extends Model
 {
+    use SoftDeletes;
+
     protected $fillable = [
 	    'name',
         'address',

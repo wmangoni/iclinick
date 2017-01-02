@@ -4,9 +4,12 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use App\ModelBase;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Doctor extends ModelBase
 {
+    use SoftDeletes;
+
     protected $fillable = [
     	'name',
         'email',
