@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    <div id="page-wrapper">
+    <div id="page-wrapper" style="min-height: 900px;">
         <div class="row">
             <div class="col-lg-12">
                 <h1 class="page-header">Módulo :: {{ $title }}</h1>
@@ -33,7 +33,7 @@
                             <h4>Create</h4>
                         </div>
                         <div class="col-md-6">
-                            <a href="/{{ $module }}" class="btn btn-warning pull-right">Voltar</a>
+                            <a href="{{ url('adm/'.$module) }}" class="btn btn-warning pull-right">Voltar</a>
                         </div>
                     </div>
                     <div class="panel-body">

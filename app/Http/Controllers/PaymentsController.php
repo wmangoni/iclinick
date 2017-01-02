@@ -106,7 +106,7 @@ class PaymentsController extends Controller
     {
         $payment = Payment::find($id);
         $payment->update($request->all());
-        return redirect($this->module . '/' . $payment->id . '/edit');
+        return back()->with('msg', 'Pagamento atualizado com sucesso');
     }
 
     /**
@@ -118,6 +118,6 @@ class PaymentsController extends Controller
     public function destroy($id)
     {
         Payment::destroy($id);
-        return redirect($this->module)->with('msg', 'Pagamento removido com sucesso');
+        return back()->with('msg', 'Pagamento removido com sucesso');
     }
 }

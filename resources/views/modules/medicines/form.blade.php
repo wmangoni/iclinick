@@ -1,9 +1,9 @@
-    @if(isset($medicine->id))
-        {{ Form::model($medicine, ['route' => ['medicines.update', $medicine->id]]) }}
-        {{ method_field('PUT') }}
-    @else
-        {!! Form::open(['url' => $route]) !!}
-    @endif
+@if(isset($medicine->id))
+    {{ Form::model($medicine, ['route' => ['medicines.update', $medicine->id]]) }}
+    {{ method_field('PUT') }}
+@else
+    {!! Form::open(['url' => $route]) !!}
+@endif
     <div class="row">
         <div class="col-md-12">
             <div class="col-md-12">

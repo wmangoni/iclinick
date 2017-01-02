@@ -8,6 +8,7 @@ use App\State;
 
 class DoctorsController extends Controller
 {
+    private $module = 'doctors';
     /**
      * Display a listing of the resource.
      *
@@ -36,29 +37,29 @@ class DoctorsController extends Controller
      */
     public function create()
     {
-        $doctor = new Doctor();
         $fillables = [
-            'name' => ['size' => 12, 'type' => 'text', 'value' => null, 'class' => 'form-control'],
-            'email' => ['size' => 12, 'type' => 'text', 'value' => null, 'class' => 'form-control'],
-            'birthday' => ['size' => 12, 'type' => 'text', 'value' => null, 'class' => 'form-control'],
-            'address' => ['size' => 12, 'type' => 'text', 'value' => null, 'class' => 'form-control'],
-            'city_id' => ['size' => 12, 'type' => 'text', 'value' => null, 'class' => 'form-control'],
-            'state_id' => ['size' => 12, 'type' => 'select', 'value' => null, 'class' => 'form-control', 'options' => State::all()],
-            'zipcode' => ['size' => 12, 'type' => 'text', 'value' => null, 'class' => 'form-control'],
-            'Phone' => ['size' => 12, 'type' => 'text', 'value' => null, 'class' => 'form-control'],
-            'Phone_cel' => ['size' => 12, 'type' => 'text', 'value' => null, 'class' => 'form-control'],
-            'genre' => ['size' => 12, 'type' => 'text', 'value' => null, 'class' => 'form-control'],
-            'crm' => ['size' => 12, 'type' => 'text', 'value' => null, 'class' => 'form-control'],
-            'crm_status' => ['size' => 12, 'type' => 'text', 'value' => null, 'class' => 'form-control'],
-            'pass' => ['size' => 12, 'type' => 'text', 'value' => null, 'class' => 'form-control'],
-            'status' => ['size' => 12, 'type' => 'text', 'value' => null, 'class' => 'form-control'],
-            'obs' => ['size' => 12, 'type' => 'text', 'value' => null, 'class' => 'form-control']
+            'name' => ['label' => 'Nome', 'size' => 4, 'type' => 'text', 'value' => null, 'class' => 'form-control'],
+            'email' => ['label' => 'Email', 'size' => 4, 'type' => 'text', 'value' => null, 'class' => 'form-control'],
+            'birthday' => ['label' => 'Data Nasc.', 'size' => 4, 'type' => 'text', 'value' => null, 'class' => 'form-control'],
+            'address' => ['label' => 'Endereço', 'size' => 12, 'type' => 'text', 'value' => null, 'class' => 'form-control'],
+            'state_id' => ['label' => 'Estado', 'size' => 6, 'type' => 'select', 'value' => null, 'class' => 'form-control', 'options' => State::all()],
+            'city_id' => ['label' => 'Cidade', 'size' => 6, 'type' => 'text', 'value' => null, 'class' => 'form-control'],
+            'zipcode' => ['label' => 'CEP', 'size' => 4, 'type' => 'text', 'value' => null, 'class' => 'form-control'],
+            'Phone' => ['label' => 'Telefone', 'size' => 4, 'type' => 'text', 'value' => null, 'class' => 'form-control'],
+            'Phone_cel' => ['label' => 'Celular', 'size' => 4, 'type' => 'text', 'value' => null, 'class' => 'form-control'],
+            'genre' => ['label' => 'Sexo', 'size' => 4, 'type' => 'text', 'value' => null, 'class' => 'form-control'],
+            'crm' => ['label' => 'CRM', 'size' => 4, 'type' => 'text', 'value' => null, 'class' => 'form-control'],
+            'crm_status' => ['label' => 'Status CRM', 'size' => 4, 'type' => 'text', 'value' => null, 'class' => 'form-control'],
+            'pass' => ['label' => 'Senha', 'size' => 4, 'type' => 'text', 'value' => null, 'class' => 'form-control'],
+            'status' => ['label' => 'Status', 'size' => 4, 'type' => 'text', 'value' => null, 'class' => 'form-control'],
+            'obs' => ['label' => 'Observação', 'size' => 4, 'type' => 'text', 'value' => null, 'class' => 'form-control']
         ];
         $title = 'Doctors';
         $module = 'doctors';
         $route = route('doctors.store');
         $method = 'PUT';
-        return view('create', compact('title', 'patients', 'total', 'module', 'fillables', 'route', 'method'));
+        $formulario = 'modules.'.$this->module.'.form';
+        return view('create', compact('title', 'patients', 'total', 'module', 'fillables', 'route', 'method', 'formulario'));
     }
 
     /**
@@ -69,7 +70,8 @@ class DoctorsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $doctor = new Doctor($request);
+        $doctor->save();
     }
 
     /**
@@ -115,6 +117,6 @@ class DoctorsController extends Controller
     public function destroy($id)
     {
         Doctor::destroy($id);
-        return redirect($this->module)->with('msg', 'Doutor removido com sucesso');
+        return back()->with('msg', 'Doutor removido com sucesso');
     }
 }

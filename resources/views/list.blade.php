@@ -53,10 +53,10 @@
                                             @endif
                                         @endforeach
                                         <?php $edit_link = 'adm/' . $modulo . '/' . $model->id . '/edit' ?>
-                                        <td style="min-width: 73px;">
+                                        <td style="width: 73px;">
                                             <a class="btn btn-info" href="{{ url($edit_link) }}"><i class="fa fa-edit"></i> Editar</a>
                                         </td>
-                                        <td style="min-width: 73px;">
+                                        <td style="width: 73px;">
                                             <form action="{{ route($modulo . '.destroy', $model->id) }}" method="POST">
                                                 {{ method_field('DELETE') }}
                                                 <input type="hidden" name="_token" value="{{ csrf_token() }}">

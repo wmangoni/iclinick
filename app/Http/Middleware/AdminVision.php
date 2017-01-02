@@ -26,7 +26,6 @@ class AdminVision
 
             if(session('user_type') != 1)
                 return response()->view('errors.denied', ['name' => session('user_name') ], 500);
-                //dd($request);
         }
 
         return $next($request);

@@ -97,7 +97,7 @@ class MedicinesController extends Controller
     {
         $medicine = Medicine::find($id);
         $medicine->update($request->all());
-        return redirect($this->module . '/' . $medicine->id . '/edit');
+        return back()->with('msg', 'Medicamento atualizado com sucesso');
     }
 
     /**
@@ -109,5 +109,6 @@ class MedicinesController extends Controller
     public function destroy($id)
     {
         Medicine::destroy($id);
+        back()->with('msg', 'Medicamento removido com sucesso');
     }
 }

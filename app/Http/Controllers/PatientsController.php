@@ -127,7 +127,7 @@ class PatientsController extends Controller
     {
         $patient = Patient::find($id);
         $patient->update($request->all());
-        return back()->with('msg', 'Paciente editado com sucesso');
+        return back()->with('msg', 'Paciente atualizado com sucesso');
     }
 
     /**
@@ -139,6 +139,6 @@ class PatientsController extends Controller
     public function destroy($id)
     {
         Patient::destroy($id);
-        return redirect()->route($this->module)->with('msg', 'Paciente removido com sucesso');
+        return back()->with('msg', 'Paciente removido com sucesso');
     }
 }

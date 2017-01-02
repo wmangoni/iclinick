@@ -2,30 +2,29 @@
 
 namespace App\Http\Controllers;
 
+use App\Module;
 use Illuminate\Http\Request;
-use App\Service;
 
-class ServicesController extends Controller
+class ModulesController extends Controller
 {
-    private $module = 'services';
+    protected $request;
+    private $module = 'modules';
 
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    public function __construct(Request $request) {
+        $this->request = $request;
+    }
+
     public function index()
     {
-        $title = 'Services';
-        $modulo = 'services';
-        $models = Service::all();
-        $total = Service::all()->count();
+        $title = 'Configurations';
+        $modulo = $this->module;
+        $models = Module::all();
+        $total = Module::all()->count();
         $fields = [
             'id',
             'name',
-            'description',
-            'created_at',
-            'updated_at'
+            'route',
+            'status'
         ];
         return view('list', compact('title', 'models', 'total', 'fields', 'modulo'));
     }
@@ -37,10 +36,11 @@ class ServicesController extends Controller
      */
     public function create()
     {
-        $title = 'Services';
+        $title = 'Modules';
         $module = $this->module;
         $route = route($this->module . '.store');
         $formulario = 'modules.'.$this->module.'.form';
+
         return view('create', compact('title', 'module', 'route', 'formulario'));
     }
 
@@ -48,14 +48,18 @@ class ServicesController extends Controller
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function store(Request $request)
     {
-        $service = new Service($request->all());
-        $service->doctor_id = session('user_id');
-        $service->save();
-        return redirect($this->module . '/' . $service->id . '/edit');
+        $validation = Module::validate($this->request->all());
+
+        if($validation->fails()) {
+            return redirect()->route('modules.create')->withErrors($validation)->withInput();
+        }
+        $config = new Module($request->all());
+        $config->save();
+        return redirect('adm/' . $this->module . '/' . $config->id . '/edit')->with('msg', 'Módulo cadastrado com sucesso');
     }
 
     /**
@@ -77,13 +81,13 @@ class ServicesController extends Controller
      */
     public function edit($id)
     {
-        $title = 'Services';
-        $module = $this->module;
-        $route = route($this->module.'.update', $id);
+        $title = 'Modules';
+        $route = route($this->module . '.update', $id);
         $formulario = 'modules.'.$this->module.'.form';
-        $service = Service::find($id);
+        $modulo = Module::find($id);
+        $module = $this->module;
 
-        return view('create', compact('title', 'module', 'route', 'formulario', 'service'));
+        return view('create', compact('title', 'route', 'formulario', 'module', 'modulo'));
     }
 
     /**
@@ -95,9 +99,9 @@ class ServicesController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $service = Service::find($id);
-        $service->update($request->all());
-        return back()->with('msg', 'Serviço atualizado com sucesso');
+        $patient = Module::find($id);
+        $patient->update($request->all());
+        return back()->with('msg', 'Módulo editado com sucesso');
     }
 
     /**
@@ -108,7 +112,7 @@ class ServicesController extends Controller
      */
     public function destroy($id)
     {
-        Service::destroy($id);
-        return back()->with('msg', 'Serviço removido com sucesso');
+        Module::destroy($id);
+        return back()->with('msg', 'Módulo removido com sucesso');
     }
 }

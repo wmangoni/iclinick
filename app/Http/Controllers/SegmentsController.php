@@ -97,7 +97,7 @@ class SegmentsController extends Controller
     {
         $segment = Segment::find($id);
         $segment->update($request->all());
-        return redirect($this->module . '/' . $segment->id . '/edit');
+        return back()->with('msg', 'Segmento removida com sucesso');
     }
 
     /**
@@ -109,6 +109,6 @@ class SegmentsController extends Controller
     public function destroy($id)
     {
         Segment::destroy($id);
-        return redirect($this->module)->with('msg', 'Segmento removido com sucesso');
+        return back()->with('msg', 'Segmento removido com sucesso');
     }
 }

@@ -4,10 +4,20 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Convenio;
+use Gate;
 
 class ConveniosController extends Controller
 {
     private $module = 'convenios';
+    private $module_id = 2;
+
+    public function __construct()
+    {
+        if (Gate::denies('permission-to-show', session('user_id'), $this->module_id)) {
+            abort(403, 'Você não tem permissão para realizar esta ação');
+        }
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -51,10 +61,14 @@ class ConveniosController extends Controller
      */
     public function store(Request $request)
     {
+        if (Gate::denies('permission-to-insert', session('user_id'), $this->module_id)) {
+            abort(403, 'Você não tem permissão para realizar esta ação');
+        }
+
         $convenio = new Convenio($request->all());
         $convenio->doctor_id = session('user_id');
         $convenio->save();
-        return redirect($this->module . '/' . $convenio->id . '/edit');
+        return redirect('adm' . $this->module . '/' . $convenio->id . '/edit');
     }
 
     /**
@@ -94,9 +108,13 @@ class ConveniosController extends Controller
      */
     public function update(Request $request, $id)
     {
+        if (Gate::denies('permission-to-update', session('user_id'), $this->module_id)) {
+            abort(403, 'Você não tem permissão para realizar esta ação');
+        }
+
         $convenio = Convenio::find($id);
         $convenio->update($request->all());
-        return redirect($this->module . '/' . $convenio->id . '/edit');
+        return back()->with('msg', 'Convênio atualizado com sucesso');
     }
 
     /**
@@ -107,8 +125,12 @@ class ConveniosController extends Controller
      */
     public function destroy($id)
     {
+        if (Gate::denies('permission-to-delete', session('user_id'), $this->module_id)) {
+            abort(403, 'Você não tem permissão para realizar esta ação');
+        }
+
         $convenio = Convenio::find($id);
         $convenio->delete();
-        return redirect($this->module);
+        return back()->with('msg', 'Convênio removido com sucesso');
     }
 }

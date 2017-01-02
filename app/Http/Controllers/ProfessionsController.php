@@ -99,7 +99,7 @@ class ProfessionsController extends Controller
     {
         $profession = Profession::find($id);
         $profession->update($request->all());
-        return redirect($this->module . '/' . $profession->id . '/edit');
+        return back()->with('msg', 'Profissão atualizada com sucesso');
     }
 
     /**
@@ -111,6 +111,6 @@ class ProfessionsController extends Controller
     public function destroy($id)
     {
         Profession::destroy($id);
-        return redirect($this->module)->with('msg', 'Profissão removida com sucesso');
+        return back()->with('msg', 'Profissão removida com sucesso');
     }
 }
