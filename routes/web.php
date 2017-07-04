@@ -33,7 +33,7 @@ Route::group(['prefix' => 'adm'], function () {
     });
 
     Route::group(['middleware' => 'auth'], function () {
-        Route::get('/', [ 'as' => 'home.index', 'uses' => 'HomeController@index']);
+        //Route::get('/', [ 'as' => 'home.index', 'uses' => 'HomeController@index']);
         Route::get('/home', [ 'as' => 'home.index', 'uses' => 'HomeController@index']);
         Route::get('/config', [ 'as' => 'config.index', 'uses' => 'ConfigController@index']);
 
