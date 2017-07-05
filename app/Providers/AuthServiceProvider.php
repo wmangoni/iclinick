@@ -22,6 +22,8 @@ class AuthServiceProvider extends ServiceProvider
     /**
      * Register any authentication / authorization services.
      *
+     * @param GateContract $gate
+     *
      * @return void
      */
     public function boot(GateContract $gate)
@@ -46,13 +48,18 @@ class AuthServiceProvider extends ServiceProvider
 
     }
 
+    /**
+     * @param $action
+     * @param $user
+     * @param $module_id
+     * @return bool
+     */
     private function retrieveUserPermission($action, $user, $module_id)
     {
         $permission = Actions_user::where('user_id', $user->id)->where('module_id', $module_id)->get()->toArray();
         $permission = end($permission);
 
         if ($permission) {
-
 
             if ($permission[$action] == 1)
                 return TRUE;
@@ -64,6 +71,12 @@ class AuthServiceProvider extends ServiceProvider
         }
     }
 
+    /**
+     * @param $action
+     * @param $user
+     * @param $module_id
+     * @return bool
+     */
     private function retrieveGroupPermission($action, $user, $module_id)
     {
         $permission = Actions_group::where('group_id', $user->group_id)->where('module_id', $module_id)->get()->toArray();
