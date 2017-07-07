@@ -19,11 +19,15 @@ class RedirectIfAuthenticated
     public function handle($request, Closure $next, $guard = null)
     {
         if (Auth::guard($guard)->check()) {
-            return redirect('/home');
+            return redirect('/adm/home');
         }
         $user = DB::table('users')->where('email', $request->email)->get()->toArray();
-        $user = $user[0];
-        session(['user_id' => $user->id, 'user_name' => $user->name, 'user_email' => $user->email, 'user_type' => $user->type]);
+        if (!empty($user)) {
+            $user = $user[0];
+            session(['user_id' => $user->id, 'user_name' => $user->name, 'user_email' => $user->email, 'user_type' => $user->type]);
+        } else {
+            return redirect('/adm/login')->withErrors(['Dados inválidos.', 'msg']);
+        }
 
         return $next($request);
     }

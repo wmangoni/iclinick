@@ -21,6 +21,12 @@
                                         <strong>{{ $errors->first('email') }}</strong>
                                     </span>
                                 @endif
+
+                                @if ($errors->any())
+                                    <span class="help-block">
+                                        <strong style="color: red;">{{ $errors->first() }}</strong>
+                                    </span>
+                                @endif
                             </div>
                         </div>
 

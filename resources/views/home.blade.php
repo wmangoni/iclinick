@@ -10,6 +10,7 @@
             </div>
             <!-- /.row -->
             <div class="row">
+            @if (isset($counts) && !empty($counts))
                 @foreach($counts as $key => $value)
                 <div class="col-lg-4">
                     <div class="panel panel-{{ $value['class'] }}">
@@ -26,6 +27,7 @@
                 </div>
                 @endforeach
                 <!-- /.col-lg-4 -->
+            @endif
             </div>
             <!-- /.row -->
             <div class="row">

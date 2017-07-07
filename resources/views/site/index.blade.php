@@ -42,7 +42,7 @@
         <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav navbar-right">
                 <li><a href="#pricing" class="scroll">Planos e Preços</a></li>
-                <li><a href="#">Entrar</a></li>
+                <li><a href="/adm/login">Entrar</a></li>
             </ul>
         </div><!--/.navbar-collapse -->
     </div>
@@ -55,7 +55,7 @@
                 <a href="index.html"><img src="img/logo.png" alt="Logo"></a>
             </div>
             <div class="col-xs-6 signin text-right navbar-nav">
-                <a href="#pricing" class="scroll">Planos e Preços</a>&nbsp; &nbsp;<a href="#">Entrar</a>
+                <a href="#pricing" class="scroll">Planos e Preços</a>&nbsp; &nbsp;<a href="/adm/login">Entrar</a>
             </div>
         </div>
 

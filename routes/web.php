@@ -17,6 +17,10 @@ Route::get('/', function () {
     return view('site.index');
 });
 
+Route::get('/login', function () {
+    return view('auth.login');
+});
+
 
 Route::group(['prefix' => 'adm'], function () {
 
