@@ -56,7 +56,7 @@ class ProfessionsController extends Controller
         $profession = new Profession($request->all());
         $profession->doctor_id = session('user_id');
         $profession->save();
-        return redirect($this->module . '/' . $profession->id . '/edit');
+        return redirect('adm/' . $this->module)->with('msg', 'Profissão criado com sucesso');
     }
 
     /**

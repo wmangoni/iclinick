@@ -72,6 +72,7 @@ class DoctorsController extends Controller
     {
         $doctor = new Doctor($request);
         $doctor->save();
+        return redirect('adm/' . $this->module)->with('msg', 'Doutor criado com sucesso');
     }
 
     /**

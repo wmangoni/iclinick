@@ -55,7 +55,7 @@ class SegmentsController extends Controller
         $segment = new Segment($request->all());
         $segment->doctor_id = session('user_id');
         $segment->save();
-        return redirect($this->module . '/' . $segment->id . '/edit');
+        return redirect('adm/' . $this->module)->with('msg', 'Segmento criado com sucesso');
     }
 
     /**

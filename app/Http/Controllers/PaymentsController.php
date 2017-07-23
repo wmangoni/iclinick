@@ -59,7 +59,7 @@ class PaymentsController extends Controller
     {
         $payment = new Payment($request->all());
         $payment->save();
-        return redirect($this->module . '/' . $payment->id . '/edit');
+        return redirect('adm/' . $this->module)->with('msg', 'Pagamento criado com sucesso');
     }
 
     /**

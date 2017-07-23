@@ -55,7 +55,7 @@ class MedicinesController extends Controller
         $medicine = new Medicine($request->all());
         $medicine->doctor_id = session('user_id');
         $medicine->save();
-        return redirect($this->module . '/' . $medicine->id . '/edit');
+        return redirect('adm/' . $this->module)->with('msg', 'Profissão criado com sucesso');
     }
 
     /**
