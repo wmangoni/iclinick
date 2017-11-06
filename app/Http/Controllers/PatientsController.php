@@ -20,7 +20,7 @@ class PatientsController extends Controller
     {
         $title = 'Patients';
         $modulo = $this->module;
-        $models = Patient::all();
+        $models = Patient::orderBy('name')->get();
         $total = Patient::all()->count();
         $fields = [
             'name',

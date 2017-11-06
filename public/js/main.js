@@ -15,7 +15,10 @@
             },
             success: function(data) {
                 if(data.code == 200) {
-                    $('select[name="city_id"]').html(data.options);
+                    $('select[name="city_id"]').html(data.options, function() {
+						var city = $('#campo-cidade').data('value');
+						$('#campo-cidade').find("options[value='"+city+"']").click();
+					});
                 } else {
                     alert('Errouuuuu');
                 }
