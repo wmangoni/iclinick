@@ -29,7 +29,7 @@ class AdminVision
                 ]);
             }
 
-            if(session('user_type') != 1)
+            if (session('user_type') != 1)
                 return response()->view('errors.denied', ['name' => session('user_name') ], 403);
         }
 
