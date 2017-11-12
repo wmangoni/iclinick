@@ -26,7 +26,7 @@
                 {{ Form::label('state_id', 'Estado') }}
                 {{ Form::select('state_id', $states, null, ['class' => 'form-control']) }}
             </div>
-            <div class="col-md-3">
+            <div id="campo-cidade" class="col-md-3" data-value="{{$patient->city_id}}">
                 {{ Form::label('city_id', 'Cidade') }}
                 {{ Form::select('city_id', ['' => 'Selecione'], null, [ 'class' => 'form-control', 'data-id' => isset($patient->city_id) ? $patient->city_id : 0 ]) }}
             </div>
